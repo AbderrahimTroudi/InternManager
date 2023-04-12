@@ -1,0 +1,248 @@
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <a data-toggle="modal" data-target="#AddModal"class="btn btn-primary  m-2" style="float: right">Add</a>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>skills</th>
+                            <th>phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>skills</th>
+                            <th>phone</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let item of AllData,index as i ">
+                            <th>{{ item.nameFL }}</th>
+                            <th>{{ item.email }}</th>
+                            <th>{{ item.skills }}</th>
+                            <th>{{ item.phone }}</th>
+                      
+                            <th>
+                                <button class="btn btn-success" (click)="getbyid(item._id)" data-toggle="modal" data-target="#UpdateModal">Update</button>
+                                <button class="btn btn-info m-2" (click)="getbyid(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
+                                <button class="btn btn-danger m-2" (click)="delete(item._id,i)">Delete</button>
+
+                            </th>
+
+                        </tr>
+                  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+
+<!-- Detail Modal -->  
+ 
+  <div class="modal fade" id="DetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+            <ul *ngIf="databyid">
+                <li>ID :{{ databyid._id }}</li>
+                <li>Name :{{ databyid.nameFL }}</li>
+                <li>Email :{{ databyid.email }}</li>
+                <li>phone :{{ databyid.phone }}</li>
+                <li>skills :{{ databyid.skills }}</li>
+         
+            
+            </ul>
+            <button href="#" class="btn btn-primary" (click)="getResume(databyid._id)" target="_blank">Resume</button>
+            <div class="alert alert-danger" *ngIf="messageErr">
+                {{messageErr}}
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ <!-- Add Modal -->
+ <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #f="ngForm" (ngSubmit)="AddUser(f)">
+                <!-- name validation start here -->
+                    <div class="form-group">
+                
+                      <label for="exampleFormControlInput1">name</label>
+                      <input type="text" class="form-control" placeholder="name" required name="name" #name="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched">
+                      name is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="name.errors?.['minlength'] && name.touched">
+                      name must be minimum 2 caractere
+                    </div>
+                <!-- password validation end here -->
+                
+                
+                
+                <!-- Email validation start here -->
+                
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">email</label>
+                        <input type="email" class="form-control" placeholder="email" email  required name="email" #email="ngModel" ngModel>
+                      </div>
+                      <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
+                        email is required
+                      </div>
+                
+                      <div class="alert alert-danger" *ngIf="email.errors?.['email'] && email.touched">
+                        the input must be email not string
+                      </div>
+                <!-- Email validation end here -->
+                
+                
+                <!-- password validation start here -->
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">password</label>
+                  <input type="password" class="form-control" placeholder="password" required name="password" #password="ngModel" minlength="2" maxlength="20" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
+                  password is required
+                </div>
+                <div class="alert alert-danger" *ngIf="password.errors?.['minlength'] && password.touched">
+                  password must be minimum 2 caractere
+                </div>
+                <!-- password validation end here -->
+                
+                
+                
+                
+                <div class="alert alert-success" *ngIf="messageSuccess">
+                  {{messageSuccess}}
+              </div>  
+                
+                
+            
+                   <button class="btn btn-primary" [disabled]="f.invalid">Add student</button>
+                  </form>          
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- Update Modal -->
+  <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #f="ngForm" (ngSubmit)="UpdateUser(f)">
+                <!-- name validation start here -->
+                    <div class="form-group">
+                
+                      <label for="exampleFormControlInput1">name</label>
+                      <input type="text" class="form-control" placeholder="name" required [(ngModel)]="databyid.name" name="name" #name="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched">
+                      name is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="name.errors?.['minlength'] && name.touched">
+                      name must be minimum 2 caractere
+                    </div>
+                <!-- password validation end here -->
+                
+                
+                
+                <!-- Email validation start here -->
+                
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">email</label>
+                        <input type="email" class="form-control" placeholder="email" email  [(ngModel)]="databyid.email" required name="email" #email="ngModel" ngModel>
+                      </div>
+                      <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
+                        email is required
+                      </div>
+                
+                      <div class="alert alert-danger" *ngIf="email.errors?.['email'] && email.touched">
+                        the input must be email not string
+                      </div>
+                <!-- Email validation end here -->
+                
+                
+                <!-- password validation start here -->
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">password</label>
+                  <input type="password" class="form-control" placeholder="password" required name="password" [(ngModel)]="databyid.password" #password="ngModel" minlength="2" maxlength="20" ngModel>
+                </div>
+                <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
+                  password is required
+                </div>
+                <div class="alert alert-danger" *ngIf="password.errors?.['minlength'] && password.touched">
+                  password must be minimum 2 caractere
+                </div>
+                <!-- password validation end here -->
+                
+              
+                
+                
+                <div class="alert alert-success" *ngIf="messageSuccess">
+                  {{messageSuccess}}
+              </div>  
+                
+                
+            
+                   <button class="btn btn-primary" [disabled]="f.invalid">Update student</button>
+                  </form>          
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

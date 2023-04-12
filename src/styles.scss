@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+// Define a custom theme
+$custom-theme: mat-dark-theme();
+
+// Override the primary color
+$custom-theme: map_merge($custom-theme, (color: (
+  primary: mat-palette($mat-grey, 700),
+  accent: mat-palette($mat-blue-grey, A400),
+  warn: mat-palette($mat-red, 700),
+)));
+
+// Apply the theme to the app
+@include angular-material-theme($custom-theme);

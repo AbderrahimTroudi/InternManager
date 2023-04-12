@@ -1,0 +1,17 @@
+<ul *ngIf="dataObject">
+    <li>Title :{{ dataObject.title }}</li>
+    <li>description : {{ dataObject.description }}</li>
+    <li>requirements : {{ dataObject.requirements }}</li>
+    <li>duration_weeks : {{ dataObject.duration_weeks }}</li>
+    <li>start_date : {{ dataObject.start_date }}</li>
+    <li>end_date : {{ dataObject.end_date }}</li>
+    <li>max_candidates : {{ dataObject.max_candidates }}</li>
+    <li>spots_available : {{ dataObject.spots_available }}</li>
+    <li>status : {{ dataObject.status }}</li>
+
+</ul>
+
+<div class="alert alert-danger" *ngIf="messageErr">
+    {{messageErr}}
+</div>
+<router-outlet></router-outlet>
