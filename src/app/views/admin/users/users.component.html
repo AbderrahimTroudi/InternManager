@@ -3,18 +3,114 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p>
+    <p class="mb-4">Fix the card display in the carousel + fix the carosel indicators + split the candidate based on the year.</p>
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+
+
+
+   <!-- //////////////////////////// suprivisor card carousel /////////////////////////////////////--> 
+   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  data-interval="false">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+  
+      
+    </ol>
+    <div class="carousel-inner">
+      <ng-container *ngFor="let item of AllSuprivisor; let i = index">
+        <div class="carousel-item" [class.active]="i === 0">
+          <div class="Mycontainer">
+            <ng-container *ngIf="item.role === 'suprivisor'">
+              <div class="row">
+                <div class="m-4">
+                  <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex flex-row align-items-center">
+                        <div class="icon">
+                          <a (click)="openSuprivisorProfile(item._id)">
+                            <i class="bx bx-user"></i>
+                          </a>
+                        </div>
+                        <div class="ms-2 c-details">
+                          <h6 class="mb-2">
+                            <a (click)="openSuprivisorProfile(item._id)">
+                              {{item.name}}
+                            </a>
+                          </h6>
+                          <span>2 days ago</span>
+                        </div>
+                      </div>
+                      <div class="badge">
+                        <span>{{ item.jobtitle }}</span>
+                      </div>
+                    </div>
+                    <div class="mt-5">
+                      <h3 class="heading">
+                        {{ item.jobtitle }}<br />
+                        Java - USA
+                      </h3>
+                      <div class="mt-5">
+                        <div class="progress">
+                          <div
+                            class="progress-bar"
+                            role="progressbar"
+                            style="width: 50%"
+                            aria-valuenow="50"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                          ></div>
+                        </div>
+                        <div class="mt-3">
+                          <span class="text1">52 Applied
+                            <span class="text2">of 100 capacity</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="prev"
+      >
+        <span class="carousel-control-prev-icon"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleIndicators"
+        role="button"
+        data-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  
+
+    <!----------------------------- Candidate TABLE ------------------------------->
+    <button class="btn btn-primary m-4" (click)="showCandidateTable = !showCandidateTable">show Candidate Table</button>
+
+<div *ngIf="showCandidateTable" class=" shadow mb-4">
+    <div class=" shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Candidate Users</h6>
         </div>
         <div class="card-body">
-            <a data-toggle="modal" data-target="#AddModal"class="btn btn-primary  m-2" style="float: right">Add</a>
+            <a data-toggle="modal" data-target="#AddModalCandidate"class="btn btn-primary  m-2" style="float: right">Add</a>
             <div class="table-responsive">
+            
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -36,28 +132,233 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr *ngFor="let item of AllData,index as i ">
+             
+                        <tr *ngFor="let item of filter,index as i ">
+                          <ng-container *ngIf="item.role === 'user'">
+
                             <th>{{ item.nameFL }}</th>
                             <th>{{ item.email }}</th>
                             <th>{{ item.skills }}</th>
                             <th>{{ item.phone }}</th>
                       
                             <th>
-                                <button class="btn btn-success" (click)="getbyid(item._id)" data-toggle="modal" data-target="#UpdateModal">Update</button>
-                                <button class="btn btn-info m-2" (click)="getbyid(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
-                                <button class="btn btn-danger m-2" (click)="delete(item._id,i)">Delete</button>
+                                <button class="btn btn-info" (click)="openCandidateProfile(item._id)">Profile</button>
+                                <button class="btn btn-outline-primary m-2" (click)="getbyidCandidate(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
+                                <button class="btn btn-danger m-2" (click)="deleteCandidate(item._id,i)">Delete</button>
 
                             </th>
-
+</ng-container>
                         </tr>
-                  
                     </tbody>
                 </table>
+             
+        </div>
+    </div>
+</div>
+</div>
+  <!------------------------------- Suprivisor TABLE ------------------------------->
+  <button class="btn btn-primary m-4" (click)="showSuprivisorTable = !showSuprivisorTable">show Suprivisor Table</button>
+
+<div *ngIf="showSuprivisorTable" class=" shadow mb-4">
+    <div class="shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Suprivisors </h6>
+      </div>
+      <div class="card-body">
+          <a data-toggle="modal" data-target="#AddModalSuprivisor"class="btn btn-primary  m-2" style="float: right">Add</a>
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>jobtitle</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>jobtitle</th>
+                          <th>Action</th>
+
+                      </tr>
+                  </tfoot>
+                  <tbody>
+                    
+                      <tr *ngFor="let item of AllSuprivisor,index as i ">
+                        <ng-container *ngIf="item.role === 'suprivisor'">
+
+                          <th>{{ item.name }}</th>
+                          <th>{{ item.email }}</th>
+                          <th>{{ item.jobtitle }}</th>
+                    
+                          <th>
+                              <button class="btn btn-success" (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#UpdateModalSuprivisir">Update</button>
+                              <button class="btn btn-info m-2" (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
+                              <button class="btn btn-danger m-2" (click)="deleteSuprivisor(item._id,i)">Delete</button>
+
+                          </th>
+</ng-container>
+                      </tr>
+                
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  </div>
+  
+
+
+
+
+
+
+   
+<!-- carousel test -->
+<section class="pt-5 pb-5">
+  <div class="container">
+      <div class="row">
+          <div class="col-6">
+              <h3 class="mb-3">Carousel cards title </h3>
+          </div>
+          <div class="col-6 text-right">
+              <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                  <i class="fa fa-arrow-left"></i>
+              </a>
+              <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                  <i class="fa fa-arrow-right"></i>
+              </a>
+          </div>
+          <div class="col-12">
+              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+                  <div class="carousel-inner">
+                    
+                      <div class="carousel-item">
+                          <div class="row">
+
+                              <div class="col-md-4 mb-3">
+                                  <div class="card">
+                                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
+                                      <div class="card-body">
+                                          <h4 class="card-title">Special title treatment</h4>
+                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                      </div>
+
+                                  </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                  <div class="card">
+                                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
+                                      <div class="card-body">
+                                          <h4 class="card-title">Special title treatment</h4>
+                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                  <div class="card">
+                                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
+                                      <div class="card-body">
+                                          <h4 class="card-title">Special title treatment</h4>
+                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- carousel test -->
+
+                
+ <!-- <div class="Mycontainer">
+    <div *ngFor="let item of AllSuprivisor,index as i ">
+      <ng-container *ngIf="item.role === 'suprivisor'">
+    <div class="row">
+        
+        <div class="m-4">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="icon"> <a  (click)="openSuprivisorProfile(item._id)"><i class="bx bx-user"></i></a> </div>  
+                        <div class="ms-2 c-details">
+                            <h6 class="mb-2"><a  (click)="openSuprivisorProfile(item._id)"> {{item.name}}</a></h6> <span>2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="badge"> <span>{{ item.jobtitle }}</span> </div>
+                </div>
+                <div class="mt-5">
+                    <h3 class="heading"> {{ item.jobtitle }}<br>Java - USA</h3>
+                    <div class="mt-5">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3"> <span class="text1">52 Applied <span class="text2">of 100 capacity</span></span> </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-  
+    
+</ng-container>
+</div>-->
 
+
+                      
+
+
+
+ <!-- <div class="Mycontainer">
+    <div *ngFor="let item of AllSuprivisor,index as i ">
+      <ng-container *ngIf="item.role === 'suprivisor'">
+    <div class="row">
+        
+        <div class="m-4">
+            <div class="card p-3 mb-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="icon"> <a  (click)="openSuprivisorProfile(item._id)"><i class="bx bx-user"></i></a> </div>  
+                        <div class="ms-2 c-details">
+                            <h6 class="mb-2"><a  (click)="openSuprivisorProfile(item._id)"> {{item.name}}</a></h6> <span>2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="badge"> <span>{{ item.jobtitle }}</span> </div>
+                </div>
+                <div class="mt-5">
+                    <h3 class="heading"> {{ item.jobtitle }}<br>Java - USA</h3>
+                    <div class="mt-5">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3"> <span class="text1">52 Applied <span class="text2">of 100 capacity</span></span> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ng-container>
+</div>
+
+</div>-->
+
+
+
+
+
+
+
+  <!--//////////////////////////////////////////////////////    MODALS     /////////////////////////////////////////////////////////////////-->
 <!-- Detail Modal -->  
  
   <div class="modal fade" id="DetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -93,9 +394,10 @@
     </div>
   </div>
 
+  
 
- <!-- Add Modal -->
- <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <!-- Candidate Add Modal (this is is optional and propebly you will delete it )-->
+ <div class="modal fade" id="AddModalCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -105,7 +407,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form #f="ngForm" (ngSubmit)="AddUser(f)">
+            <form #g="ngForm" (ngSubmit)="AddCandidate(g)">
                 <!-- name validation start here -->
                     <div class="form-group">
                 
@@ -141,7 +443,7 @@
                 <!-- password validation start here -->
                 <div class="form-group">
                   <label for="exampleFormControlInput1">password</label>
-                  <input type="password" class="form-control" placeholder="password" required name="password" #password="ngModel" minlength="2" maxlength="20" ngModel>
+                  <input type="password" class="form-control" placeholder="password" required name="password" #password="ngModel" ngModel>
                 </div>
                 <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
                   password is required
@@ -167,11 +469,171 @@
     </div>
   </div>
 </div>
+ <!-- end of Candidate Add Modal (this is is optional and propebly you will delete it )-->
+
+ <!-- Suprivisor Add Modal -->
+
+<div class="modal fade" id="AddModalSuprivisor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form #f="ngForm" (ngSubmit)="AddSuprivisor(f)">
+              <!-- name validation start here -->
+                  <div class="form-group">
+              
+                    <label for="exampleFormControlInput1">name</label>
+                    <input type="text" class="form-control" placeholder="name" required name="name" #name="ngModel" ngModel minlength="2" maxlength="20">
+                  </div>
+                  <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched">
+                    name is required
+                  </div>
+                  <div class="alert alert-danger" *ngIf="name.errors?.['minlength'] && name.touched">
+                    name must be minimum 2 caractere
+                  </div>
+              <!-- name validation end here -->
+              
+              
+              
+              <!-- Email validation start here -->
+              
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">email</label>
+                      <input type="email" class="form-control" placeholder="email" email  required name="email" #email="ngModel" ngModel>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
+                      email is required
+                    </div>
+              
+                    <div class="alert alert-danger" *ngIf="email.errors?.['email'] && email.touched">
+                      the input must be email not string
+                    </div>
+              <!-- Email validation end here -->
+              
+              
+              <!-- password validation start here -->
+              <div class="form-group">
+                <label for="exampleFormControlInput1">password</label>
+                <input type="password" class="form-control" placeholder="password" required name="password" #password="ngModel" ngModel>
+              </div>
+              <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
+                password is required
+              </div>
+              <div class="alert alert-danger" *ngIf="password.errors?.['minlength'] && password.touched">
+                password must be minimum 2 caractere
+              </div>
+              <!-- password validation end here -->
+              
+
+              <!-- jobtitle validation start here -->
+              <div class="form-group">
+              
+                <label for="exampleFormControlInput1">jobtitle</label>
+                <input type="text" class="form-control" placeholder="jobtitle" required name="jobtitle" #jobtitle="ngModel"  ngModel>
+              </div>
+              <div class="alert alert-danger" *ngIf="jobtitle.errors?.['required'] && jobtitle.touched">
+                jobtitle is required
+              </div>
+              <div class="alert alert-danger" *ngIf="jobtitle.errors?.['minlength'] && jobtitle.touched">
+                jobtitle must be minimum 2 caractere
+              </div>
+              <!-- jobtitle validation end here -->
+
+              <!-- phone validation start here -->
+              <div class="form-group">
+              
+                <label for="exampleFormControlInput1">phone</label>
+                <input type="number" class="form-control" placeholder="phone" required name="phone" #phone="ngModel" ngModel>
+              </div>
+              <div class="alert alert-danger" *ngIf="phone.errors?.['required'] && phone.touched">
+                phone is required
+              </div>
+              <div class="alert alert-danger" *ngIf="phone.errors?.['minlength'] && phone.touched">
+                phone must be minimum 2 caractere
+              </div>
+              <!-- phone validation end here -->
 
 
+              <!-- githublink validation start here -->
+              <div class="form-group">
+              
+                <label for="exampleFormControlInput1">githublink</label>
+                <input type="text" class="form-control" placeholder="githublink" required name="githublink" #githublink="ngModel" ngModel minlength="2" maxlength="20">
+              </div>
+              <div class="alert alert-danger" *ngIf="githublink.errors?.['required'] && githublink.touched">
+                githublink is required
+              </div>
+              <div class="alert alert-danger" *ngIf="githublink.errors?.['minlength'] && githublink.touched">
+                githublink must be minimum 2 caractere
+              </div>
+              <!-- githublink validation end here -->
 
-  <!-- Update Modal -->
-  <div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+              <!-- linkedinlink validation start here -->
+              <div class="form-group">
+              
+                <label for="exampleFormControlInput1"> linkedinlink</label>
+                <input type="text" class="form-control" placeholder=" linkedinlink" required  name="linkedinlink" #linkedinlink="ngModel" ngModel minlength="2" maxlength="20">
+              </div>
+              <div class="alert alert-danger" *ngIf=" linkedinlink.errors?.['required'] &&  linkedinlink.touched">
+                 linkedinlink is required
+              </div>
+              <div class="alert alert-danger" *ngIf=" linkedinlink.errors?.['minlength'] &&  linkedinlink.touched">
+                 linkedinlink must be minimum 2 caractere
+              </div>
+              <!-- linkedinlink validation end here -->
+
+              <!-- description validation start here -->
+              <div class="form-group">
+              
+                <label for="exampleFormControlInput1"> description</label>
+                <input type="text" class="form-control" placeholder=" description" required  name="description" #description="ngModel" ngModel minlength="2" maxlength="20">
+              </div>
+              <div class="alert alert-danger" *ngIf=" description.errors?.['required'] &&  description.touched">
+                 description is required
+              </div>
+              <div class="alert alert-danger" *ngIf=" description.errors?.['minlength'] &&  description.touched">
+                 description must be minimum 2 caractere
+              </div>
+              <!-- description validation end here -->
+
+              <!-- speacialty validation start here -->
+              <div class="form-group">
+              
+                <label for="exampleFormControlInput1"> speacialty</label>
+                <input type="text" class="form-control" placeholder=" speacialty" required  name="speacialty" #speacialty="ngModel" ngModel minlength="2" maxlength="20">
+              </div>
+              <div class="alert alert-danger" *ngIf=" speacialty.errors?.['required'] &&  speacialty.touched">
+                 speacialty is required
+              </div>
+              <div class="alert alert-danger" *ngIf=" speacialty.errors?.['minlength'] &&  speacialty.touched">
+                 speacialty must be minimum 2 caractere
+              </div>
+              <!-- speacialty validation end here -->
+         
+              <div class="alert alert-success" *ngIf="messageSuccess">
+                {{messageSuccess}}
+            </div>  
+              
+              
+          
+                 <button class="btn btn-primary">Add student</button>
+                </form>          
+     
+    </div>
+  </div>
+</div>
+</div>
+ <!--end of Suprivisor Add Modal -->
+
+
+  <!-- Candidate Update Modal -->
+  <div class="modal fade" id="UpdateModalCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -181,7 +643,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form #f="ngForm" (ngSubmit)="UpdateUser(f)">
+            <form #f="ngForm" (ngSubmit)="UpdateCandidate(f)">
                 <!-- name validation start here -->
                     <div class="form-group">
                 
@@ -243,6 +705,106 @@
     </div>
   </div>
 </div>
+  <!-- end of Candidate Update Modal -->
+
+  <!-- Suprivisor Update Modal -->
+
+<div class="modal fade" id="UpdateModalSuprivisor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form #f="ngForm" (ngSubmit)="UpdateSuprivisor(f)">
+              <!-- name validation start here -->
+                  <div class="form-group">
+              
+                    <label for="exampleFormControlInput1">name</label>
+                    <input type="text" class="form-control" placeholder="name" required [(ngModel)]="databyid.name" name="name" #name="ngModel" ngModel minlength="2" maxlength="20">
+                  </div>
+                  <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched">
+                    name is required
+                  </div>
+                  <div class="alert alert-danger" *ngIf="name.errors?.['minlength'] && name.touched">
+                    name must be minimum 2 caractere
+                  </div>
+              <!-- password validation end here -->
+              
+              
+              
+              <!-- Email validation start here -->
+              
+                    <div class="form-group">
+                      <label for="exampleFormControlInput1">email</label>
+                      <input type="email" class="form-control" placeholder="email" email  [(ngModel)]="databyid.email" required name="email" #email="ngModel" ngModel>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
+                      email is required
+                    </div>
+              
+                    <div class="alert alert-danger" *ngIf="email.errors?.['email'] && email.touched">
+                      the input must be email not string
+                    </div>
+              <!-- Email validation end here -->
+              
+              
+              <!-- password validation start here -->
+              <div class="form-group">
+                <label for="exampleFormControlInput1">password</label>
+                <input type="password" class="form-control" placeholder="password" required name="password" [(ngModel)]="databyid.password" #password="ngModel" minlength="2" maxlength="20" ngModel>
+              </div>
+              <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
+                password is required
+              </div>
+              <div class="alert alert-danger" *ngIf="password.errors?.['minlength'] && password.touched">
+                password must be minimum 2 caractere
+              </div>
+              <!-- password validation end here -->
+              
+            
+              
+              
+              <div class="alert alert-success" *ngIf="messageSuccess">
+                {{messageSuccess}}
+            </div>  
+              
+              
+          
+                 <button class="btn btn-primary" [disabled]="f.invalid">Update student</button>
+                </form>          
+     
+    </div>
+  </div>
+</div>
+</div>
+  <!--end of  Suprivisor Update Modal -->
 
 
+<script>
+  $('#recipeCarousel').carousel({
+  interval: 10000
+})
 
+$('.carousel .carousel-item').each(function(){
+    var minPerSlide = 3;
+    var next = $(this).next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    for (var i=0;i<minPerSlide;i++) {
+        next=next.next();
+        if (!next.length) {
+        	next = $(this).siblings(':first');
+      	}
+        
+        next.children(':first-child').clone().appendTo($(this));
+      }
+});
+
+</script>

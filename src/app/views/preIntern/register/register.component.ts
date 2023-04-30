@@ -32,6 +32,7 @@ export class RegisterComponent {
   currentStep = 1;
   messageErr = '';
   candidate: any;
+  loading=false;
 
   constructor(
     private ds: ServicesService,
@@ -54,9 +55,8 @@ export class RegisterComponent {
       });
   }
 
-  showSuccess() {}
-  ngOnInit(): void {}
   onSubmit() {
+
     const form = new FormData();
     form.append('nameFL', this.formData.nameFL);
     form.append('email', this.formData.email);
@@ -66,6 +66,10 @@ export class RegisterComponent {
     if (this.formData.file !== null) {
       form.append('file', this.formData.file);
     }
+   if(form== null){          this.messageErr = 'fill the form';
+  }
+  else{
+    this.loading=true;
 
     this.http
       .post('http://localhost:3000/crudapi/candidate/register', form)
@@ -73,12 +77,14 @@ export class RegisterComponent {
         (response) => {
           this.messageErr = '';
           this.sucessMSG = 'success'; // you will need to change arround this part to be if(success == > navigate candidate application list)
+          this.loading=false;
         },
         (err: HttpErrorResponse) => {
           this.messageErr = err.error;
           this.sucessMSG = '';
         }
       );
+    }
   }
 
   onFileSelected(event: any) {

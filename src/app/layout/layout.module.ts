@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { InternLayoutComponent } from './intern-layout/intern-layout.component';
 import { LandingpageLayoutComponent } from './landingpage-layout/landingpage-layout.component';
 import { SuprivisorLayoutComponent } from './suprivisor-layout/suprivisor-layout.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SuprivisorLayoutComponent } from './suprivisor-layout/suprivisor-layout
   ],
   imports: [
     CommonModule,
-    LayoutRoutingModule
+    LayoutRoutingModule,
+    FormsModule
   ]
 })
 export class LayoutModule { }

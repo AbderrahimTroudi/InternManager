@@ -23,6 +23,8 @@
                             <th>requirements</th>
                             <th>duration_weeks</th>
                             <th>spots_available</th>
+                            <th>category</th>
+
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -33,6 +35,8 @@
                             <th>requirements</th>
                             <th>duration_weeks</th>
                             <th>spots_available</th>
+                            <th>category</th>
+
                             <th>Actions</th>
 
                         </tr>
@@ -44,6 +48,8 @@
                             <th>{{ item.requirements }}</th>
                             <th>{{ item.duration_weeks }}</th>
                             <th>{{ item.spots_available }}</th>
+                            <th>{{ item.category }}</th>
+
                             <th>
                                 <button class="btn btn-success" (click)="getdata(item.title,item.status,item.requirements,item.duration_weeks,item.spots_available,item._id)" data-toggle="modal" data-target="#UpdateModal">Update</button>
                                 <button class="btn btn-info m-2" (click)="details(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
@@ -227,10 +233,33 @@
                       <div class="alert alert-danger" *ngIf="status.errors?.['minlength'] && status.touched">
                         status must be minimum 2 caractere
                       </div>
+
+                     
                  
+                      <div class="form-group">
                 
-                
-                
+                    
+                     
+                      <select name="category" #category="ngModel" ngModel >
+                        <option value="">Select a Category</option>
+
+                        <option>Front-end</option>
+                        <option>Back-end</option>
+                        <option>UI/UX design</option>
+                        <option>Software development</option>
+                        <option>FullStack</option>
+                        <option>Mobile development</option>
+                        <option>BI</option>
+                        <option>development</option>
+                        <option>other</option>
+  
+                       </select>
+                       </div>
+                      <select (change)="getAllSupervisors()" name="suprivisorid" #suprivisorid="ngModel" ngModel>
+                        <option value="">Select a Supervisor</option>
+                        <option *ngFor="let supervisor of supervisors" [value]="supervisor._id">{{supervisor.name}}</option>
+                      </select>
+                      
               
                 
                 <div class="alert alert-success" *ngIf="messageSuccess">

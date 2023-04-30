@@ -1,0 +1,83 @@
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Internship </h6>
+        </div>
+        <div class="card-body">
+            <a data-toggle="modal" data-target="#AddModal"class="btn btn-primary  m-2" style="float: right">Add</a>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>candidate name</th>
+                            <th>Internship title</th>
+                            <th>Actions</th>
+            
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>title</th>
+                            <th>status</th>
+                            <th>Actions</th>
+
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let item of dataArray;index as i ">
+                            <th>{{ item.candidate_name }}</th>
+                            <th>{{ item.title }}</th>
+                            <th>
+                                <button class="btn btn-info m-2"  data-toggle="modal"  (click)="nav(item.candidate_ID)">Profile</button>
+                                <button class="btn btn-success m-2"   data-toggle="modal" data-target="#confirmation" (click)="accpet(item._id,i)"  [disabled]="buttonDisabled[i]">Accept</button>
+                                <button class="btn btn-danger m-2"  data-toggle="modal" (click)="refuse(item._id)" [disabled]="buttonDisabled" >Refuse</button>
+
+
+
+                            </th>
+
+                        </tr>
+                  
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <!-- Detail Modal -->  
+ <!-- Confirmation Modal -->
+<div class="modal"  id ="confirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Action</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to proceed with this action?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
+          <button type="button" class="btn btn-primary" >Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+

@@ -21,17 +21,24 @@ export class InternshipComponent implements OnInit {
       requirements:'',
       duration_weeks:'',
       spots_available:'',
+      category:'',
       id:'',
     }
-    
+    supervisors :any;
+
     constructor(private dataService: ServicesService,private route:Router,private http: HttpClient,private Route:ActivatedRoute) {
       this.dataService.getAllStudents("internship/getall").subscribe(data=>{
         this.dataArray=data
         this.AllData=data
   console.log(this.AllData)
   console.log(this.dataArray)
+  this.dataService.getAllSuprivisor('/getall').subscribe(res=>{
+    console.log("response : ",res)
+    this.supervisors= res;
+  }) ; 
 
       })
+      
       
      }
   ngOnInit(): void {
@@ -82,6 +89,7 @@ export class InternshipComponent implements OnInit {
           this.dataArray[indexId].max_candidates=data.max_candidates
           this.dataArray[indexId].spots_available=data.spots_available
           this.dataArray[indexId].status=data.status
+          this.dataArray[indexId].category=data.category
 
 
         
@@ -102,14 +110,14 @@ export class InternshipComponent implements OnInit {
 
     AddUser(f:any){
       let data=f.value
-  
+  console.log("test data : ",data)
       let x = this.dataService.AddStudent(data,"internship/register").subscribe(response=>{
         this.dataService.getAllStudents("internship/getall").subscribe(data=>{
           this.dataArray=data
           this.AllData=data
         })
       },(err:HttpErrorResponse)=>{
-        this.messageErr=err.error
+        console.log(err)
     
       })
       
@@ -127,4 +135,9 @@ details(id:any){
   
     })
     }
+
+    getAllSupervisors() {
+   
+    }
+
   }

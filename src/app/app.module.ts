@@ -11,19 +11,29 @@ import { InternshipDetailsComponent } from './views/preIntern/internship-details
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SuprivisorProfileComponent } from './views/suprivisor/suprivisor-profile/suprivisor-profile.component';
+import { InternManagmentComponent } from './views/suprivisor/intern-managment/intern-managment.component';
+import { InternshipManagmentComponent } from './views/suprivisor/internship-managment/internship-managment.component';
+import { FormsModule } from '@angular/forms';
+import { ProgressTrackComponent } from './views/preIntern/progress-track/progress-track.component';
 @NgModule({
   declarations: [
     AppComponent,
     InternshipApplicationComponent,
     ApplicationStatusComponent,
-    InternshipDetailsComponent
+    InternshipDetailsComponent,
+    SuprivisorProfileComponent,
+    InternManagmentComponent,
+    InternshipManagmentComponent,
+    ProgressTrackComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

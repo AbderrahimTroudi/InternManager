@@ -19,4 +19,8 @@ export class InternshipDetailsComponent {
       (err:HttpErrorResponse)=>{console.log(err)
       this.messageErr="We dont't found this Internship in our database"})
    }
+  
+   
+ 
+ 
 }

@@ -1,0 +1,114 @@
+body {
+    background-color: #eee
+}
+
+
+.Mycontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+  }
+  .carousel-indicators li {
+    background-color: red;
+  }
+
+  .carousel-inner {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .carousel-item {
+    
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+/*margin-right: 0;    to display all cards but it will not activiate the arrow */ 
+  }
+  
+  
+/* display 3 */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(33.333%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-33.333%);
+    }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+
+
+.card {
+    border: none;
+    border-radius: 10px
+}
+.card:hover{
+    transform: scale(1.1);
+    transition: all linear 200ms;
+    z-index: 1;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.3);
+  }
+
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
+
+.icon {
+    background-image:url(../../../../assets/adminAsset/img/useravatar.png) ;
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px
+}
+
+.badge span {
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #fed85d;
+    justify-content: center;
+    align-items: center
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+.progress div {
+    background-color: red
+}
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
+
+
+.categoryStyle{
+  display: flex;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}

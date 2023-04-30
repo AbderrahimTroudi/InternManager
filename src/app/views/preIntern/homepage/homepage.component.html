@@ -1,30 +1,22 @@
-<div id="carouselExampleIndicators" class="carousel slide carouselS " data-ride="carousel">
+
+<div id="carouselExampleIndicators" class="carousel slide carouselS " data-ride="carousel" data-interval="false">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="d-block w-25 mx-auto" src="..\..\assets\adminAsset\img\undraw_profile.svg" alt="First slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="color: black;">First step :</h5>
-          <p style="color: black;">Register</p>
-        </div>
+    <div class="carousel-inner carouselCss"  > 
+      <div class="carousel-item active ">
+        <img class="d-block h-100 mx-auto  my-img" src="..\..\assets\adminAsset\img\Frame 2.png" alt="First slide">
+       <div></div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-25 mx-auto" src="..\..\assets\adminAsset\img\undraw_profile_2.svg" alt="Second slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="color: black;">Second step :</h5>
-          <p style="color: black;">Apply</p>
-        </div>
+        <img class="d-block h-100 mx-auto  my-img " src="..\..\assets\adminAsset\img\Frame 1.png" alt="Second slide">
+     
       </div>
       <div class="carousel-item">
-        <img class="d-block w-25 mx-auto" src="..\..\assets\adminAsset\img\undraw_profile_3.svg" alt="Third slide">
-        <div class="carousel-caption d-none d-md-block">
-          <h5 style="color: black;">Third step : </h5>
-          <p style="color: black;">Stage 1</p>
-        </div>
+        <img class="d-block h-100 mx-auto  my-img " src="..\..\assets\adminAsset\img\Frame 3.png" alt="Third slide">
+      
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -40,15 +32,43 @@
   <!-- portfolio.component.html -->
 
 <section id="portfolio">
-  <h2>Internships</h2>
+
   <div class="alert alert-danger" *ngIf="messageAuthError">
     {{messageAuthError}}
   </div>
-  <div class="float-right searchBar">
-    <input class=" mr-sm-2" type="text"  [(ngModel)]="searchTerm" (keyup)="search()">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  <div class="float-right searchBar form-inline">
+    <input class="form-control mr-sm-2" type="text"  [(ngModel)]="searchTerm" (keyup)="search()">
+    <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Search</button>
   </div>
-  <div class="container port__container">
+
+<!-- normal cards
+  <ng-container *ngFor="let category of categories">
+    <div class="card-deck" *ngIf="hasItems(category)">
+    <h3>{{ category }}</h3>
+   
+      <article *ngFor="let item of filteredData" >
+        <article *ngIf="item.category === category">
+  
+          <div class="card" style="width: 24rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Title : {{ item.title }}</h6>
+              <p class="card-text">Main requirement : {{ item.requirements }}</p>
+              <h6 class="card-subtitle mb-2 text-muted">Spots Available : {{ item.spots_available }}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Status : {{ item.status }}</h6>
+              <h6 class="card-subtitle mb-2 text-muted">category : {{ item.category }}</h6>
+              <a routerLink="internshipdetails" (click)="details(item._id)" class="btnC">Details</a>
+              <a (click)="Internshipapply(item._id,item.title)" class="btnC">Apply</a>
+            </div>
+           </div>
+        </article>
+      </article>
+    </div>
+  </ng-container>
+-->
+
+  
+  <!--<div class="container port__container">
     <article *ngFor="let item of filteredData" class="port__item">
       
         <h3>id : {{ item._id }}</h3>
@@ -59,13 +79,79 @@
                       <h3>Spots Available : {{ item.spots_available }}</h3>
       <div class="port__item-cta">
         <a  routerLink="internshipdetails" (click)="details(item._id)"  class="btnC">Details</a>
-        <a (click)="Internshipapply(item._id)" class="btnC">Apply</a>
+        <a (click)="Internshipapply(item._id,item.title)" class="btnC">Apply</a>
       </div>
       
     </article>
     
-  </div>
+  </div>-->
  
 </section>
 
 <router-outlet></router-outlet>
+
+
+
+<section class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center mb-5">
+         <h1 class="display-4 ">Internships</h1>
+  <p class="lead">choose what you see yourself able to acheive and apply !</p>
+      </div>
+    </div>
+    <ng-container *ngFor="let category of categories">
+      <div *ngIf="hasItems(category)">
+      <h3 class="categoryStyle">Internships in the {{ category }}</h3>
+     
+        <article *ngFor="let item of filteredData;let i = index" >
+          <article *ngIf="item.category === category">
+    
+    
+            <div class="card-deck">
+              <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <div class="card text-white card-has-bg click-col" style="background-image:url('../../../../assets/etcLogo.jpg');">
+                  <img class="card-img d-none" src="https://source.unsplash.com/600x900/?tech,street" alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?">
+                  <div class="card-img-overlay d-flex flex-column">
+                    <div class="card-body">
+                      <h4 class="card-title mt-0 ">{{ item.title }}</h4>
+                      <h6 class="card-subtitle mb-2 text-muted">Title : {{ item.title }}</h6>
+                      <p class="card-text">Main requirement : {{ item.requirements }}</p>
+                      <h6 class="card-subtitle mb-2 text-muted">Spots Available : {{ item.spots_available }}</h6>
+                      <h6 class="card-subtitle mb-2 text-muted">Status : {{ item.status }}</h6>
+                      <h6 class="card-subtitle mb-2 text-muted">category : {{ item.category }}</h6>
+                      <a routerLink="internshipdetails" (click)="details(item._id)" class="btnC">Details</a>
+                      <a (click)="Internshipapply(item._id,item.title)" class="btnC">Apply</a>
+                    </div>
+                    <!-- Supervisor part -->
+                    <button class="btnC" (click)="showSupervisorInfo.fill(false); showSupervisorInfo[i] = true; getSuprevisorProfile(item.suprivisorid)">Supervisor Details</button> 
+                   <!-- <button class="btnC" (click)="toggleSupervisorInfo(i)" (click)="getSuprevisorProfile(item.suprivisorid)">Supervisor Details</button> -->
+                    <div *ngIf="showSupervisorInfo[i]" class="card-footer">
+                      <div class="media">
+                        <div class="icon">
+                          <a (click)="openSuprivisorProfile(item.suprivisorid)">
+                            <img class="mr-3 rounded-circle" src="https://assets.codepen.io/460692/internal/avatars/users/default.png" alt="Generic placeholder image" style="max-width:50px">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h6 class="my-0 text-white d-block">{{ supervisorProfile.name }}</h6>
+                          <small>{{ supervisorProfile.jobtitle }}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Supervisor part -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+
+</article>
+</article>
+</div>
+</ng-container>
+</div>
+</section>
+
+

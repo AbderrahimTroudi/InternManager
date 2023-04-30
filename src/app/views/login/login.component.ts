@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ServicesService } from '../services/services.service';
+import { AdminAuthService } from '../services/admin-auth.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +14,12 @@ export class LoginComponent {
   messageAuthError:any
   url:any
   dataRecived:any
+  decodedToken:any
   tokenRecieved:any
-  constructor(private asd:AuthService,private route:Router,private arouter:ActivatedRoute) {
+  constructor(private adminservice:AdminAuthService,private asd:AuthService,private route:Router,private arouter:ActivatedRoute) {
+    console.log(this.asd.LoggedIn())
     
+  
    }
    ngOnInit(): void {
 
@@ -24,10 +30,19 @@ export class LoginComponent {
     this.asd.login(data).subscribe((res)=>
       {
         this.tokenRecieved=res;
-        console.log(this.tokenRecieved)
-         // Store the token in localStorage
-      localStorage.setItem('token', this.tokenRecieved);
+        
+       localStorage.setItem('token', this.tokenRecieved);
+
+       if ( this.tokenRecieved !== null) {
+        this.decodedToken= jwt_decode( this.tokenRecieved);
+      }
+      if(this.decodedToken.role=="user"){
       this.route.navigate(['/landingpage/home']);
+    }
+      else if(this.decodedToken.role=="admin"){
+        this.route.navigate(['/admin']);
+
+      }
       console.log("test2")
       },err=>{this.messageAuthError="invalid email and password",console.log(err)})
 
