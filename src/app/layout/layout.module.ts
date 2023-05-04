@@ -8,6 +8,7 @@ import { InternLayoutComponent } from './intern-layout/intern-layout.component';
 import { LandingpageLayoutComponent } from './landingpage-layout/landingpage-layout.component';
 import { SuprivisorLayoutComponent } from './suprivisor-layout/suprivisor-layout.component';
 import { FormsModule } from '@angular/forms';
+import { AdminAuthComponent } from './admin-auth/admin-auth.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     AdminLayoutComponent,
     InternLayoutComponent,
     LandingpageLayoutComponent,
-    SuprivisorLayoutComponent
+    SuprivisorLayoutComponent,
+    AdminAuthComponent
   ],
   imports: [
     CommonModule,

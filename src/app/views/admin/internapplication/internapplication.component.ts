@@ -70,10 +70,8 @@ nav(id:any){
       this.route.navigate(['admin/profile/',id])
     }
     disableButton(i:any){
-      console.log("button1: ",i)
 
-      this.buttonDisabled[i]= false;
-console.log("button2: ",this.buttonDisabled[i])
+      this.buttonDisabled[i]= true;
     }
   accpet(id:any,i:any)
 { 
@@ -81,19 +79,20 @@ console.log("////data_array////",this.dataArray)
 
   this.dataService.updateStudent(id,{status:'accepted'},"application/update/").subscribe((res: any) => {
     console.log(res);
-    this.disableButton(i)
+   
     // do something with the response
   }, (err: any) => {
     console.log(err);
-    this.buttonDisabled[i] = false;
 
   });
+
+  
 }
 
 refuse(id:any){
   console.log("////data_array////",this.dataArray)
 
-  this.dataService.updateStudent(id,{status:"Refused"},"application/update/").subscribe((res: any) => {
+  this.dataService.updateStudent(id,{status:"refused"},"application/update/").subscribe((res: any) => {
     console.log(res);
    // this.buttonDisabled = true;
 
@@ -103,6 +102,29 @@ refuse(id:any){
    // this.buttonDisabled = false;
 
   });
+ 
 }
+disabled(status:any){
+  if(status!="submitted"){
+    return false
+  }
+  return true
+}
+
+
+
+
+selectedItem: any;
+selectedIndex: any;
+openAcceptModal(item: any, i: number) {
+  this.selectedItem = item;
+  this.selectedIndex = i;
+
+}
+
+
+
+
+
 
 }

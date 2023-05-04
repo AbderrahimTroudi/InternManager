@@ -36,13 +36,11 @@ export class LoginComponent {
        if ( this.tokenRecieved !== null) {
         this.decodedToken= jwt_decode( this.tokenRecieved);
       }
-      if(this.decodedToken.role=="user"){
+      if(this.decodedToken.role=="user" || this.decodedToken.role=="intern" ){
       this.route.navigate(['/landingpage/home']);
+    }else{
+      this.messageAuthError="Something wrong !!"
     }
-      else if(this.decodedToken.role=="admin"){
-        this.route.navigate(['/admin']);
-
-      }
       console.log("test2")
       },err=>{this.messageAuthError="invalid email and password",console.log(err)})
 

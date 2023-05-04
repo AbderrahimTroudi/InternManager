@@ -50,7 +50,18 @@
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
-
+        <script>
+            $(document).ready(function () {
+              $("#sidebarToggle").on("click", function () {
+                $("body").toggleClass("sidebar-toggled");
+                $(".sidebar").toggleClass("toggled");
+                if ($(".sidebar").hasClass("toggled")) {
+                  $('.sidebar .collapse').collapse('hide');
+                };
+              });
+            });
+            </script>
+            
        
 
     </ul>
@@ -281,10 +292,11 @@
 
 
 
+  
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="documen">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
@@ -295,7 +307,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" (click)="logout()">Logout</a>
+                <a class="btn btn-primary" data-dismiss="modal" (click)="logout()">Logout</a>
             </div>
         </div>
     </div>

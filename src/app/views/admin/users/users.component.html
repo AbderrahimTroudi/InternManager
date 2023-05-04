@@ -134,7 +134,7 @@
                     <tbody>
              
                         <tr *ngFor="let item of filter,index as i ">
-                          <ng-container *ngIf="item.role === 'user'">
+                          <ng-container *ngIf="item.role === 'user' || item.role === 'intern'">
 
                             <th>{{ item.nameFL }}</th>
                             <th>{{ item.email }}</th>
@@ -143,8 +143,8 @@
                       
                             <th>
                                 <button class="btn btn-info" (click)="openCandidateProfile(item._id)">Profile</button>
-                                <button class="btn btn-outline-primary m-2" (click)="getbyidCandidate(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
-                                <button class="btn btn-danger m-2" (click)="deleteCandidate(item._id,i)">Delete</button>
+                                <button class="btn btn-outline-primary m-2" (click)="getbyidCandidate(item._id)" data-toggle="modal" data-target="#CandidateDetailModal">Details</button>
+                                <button class="btn btn-danger m-2" data-toggle="modal" data-target="#CandidateDeleteConfirmation" (click)="openDeleteModal(item,i)" >Delete</button>
 
                             </th>
 </ng-container>
@@ -165,7 +165,7 @@
           <h6 class="m-0 font-weight-bold text-primary">Suprivisors </h6>
       </div>
       <div class="card-body">
-          <a data-toggle="modal" data-target="#AddModalSuprivisor"class="btn btn-primary  m-2" style="float: right">Add</a>
+          <a data-toggle="modal" data-target="#AddModalSuprivisor"class="btn btn-primary  m-2" style="float: right">Add Suprivisor</a>
           <div class="table-responsive">
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -195,9 +195,9 @@
                           <th>{{ item.jobtitle }}</th>
                     
                           <th>
-                              <button class="btn btn-success" (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#UpdateModalSuprivisir">Update</button>
-                              <button class="btn btn-info m-2" (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
-                              <button class="btn btn-danger m-2" (click)="deleteSuprivisor(item._id,i)">Delete</button>
+                              <button class="btn btn-success" (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#UpdateModalSuprivisor">Update</button>
+                              <button class="btn btn-outline-primary m-2"  (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#SuprevisorDetailModal">Details</button>
+                              <button class="btn btn-danger m-2" data-toggle="modal" data-target="#SuprivisorDeleteConfirmation" (click)="openDeleteModal(item,i)" >Delete</button>
 
                           </th>
 </ng-container>
@@ -280,7 +280,7 @@
 </section>
 <!-- carousel test -->
 
-                
+              
  <!-- <div class="Mycontainer">
     <div *ngFor="let item of AllSuprivisor,index as i ">
       <ng-container *ngIf="item.role === 'suprivisor'">
@@ -359,9 +359,9 @@
 
 
   <!--//////////////////////////////////////////////////////    MODALS     /////////////////////////////////////////////////////////////////-->
-<!-- Detail Modal -->  
+<!-- Candidate Detail Modal -->  
  
-  <div class="modal fade" id="DetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="CandidateDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -393,8 +393,52 @@
       </div>
     </div>
   </div>
+  <!-- END Candidate Detail Modal -->  
 
-  
+<!-- Suprevisor Detail Modal -->  
+
+  <div class="modal fade" id="SuprevisorDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            
+            <ul *ngIf="databyid">
+                <li>ID :{{ databyid._id }}</li>
+                <li>Name :{{ databyid.name }}</li>
+                <li>Email :{{ databyid.email }}</li>
+                <li>phone :{{ databyid.phone }}</li>
+                <li>speacialty :{{ databyid.speacialty }}</li>
+                <br>
+                <li><b>Candidates:</b></li>
+                <ul>
+                  <li *ngFor="let candidate of databyid.listofcandidate">{{ candidate[0] }}</li>
+                </ul>
+                <br>
+                <li><b>Internships:</b></li>
+                <ul>
+                  <li *ngFor="let internship of databyid.listofinternship">{{ internship[0] }}</li>
+                </ul>
+            
+            </ul>
+            <button href="#" class="btn btn-primary" (click)="getResume(databyid._id)" target="_blank">Resume</button>
+            <div class="alert alert-danger" *ngIf="messageErr">
+                {{messageErr}}
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- END Suprevisor Detail Modal -->  
 
  <!-- Candidate Add Modal (this is is optional and propebly you will delete it )-->
  <div class="modal fade" id="AddModalCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -766,15 +810,106 @@
               <!-- password validation end here -->
               
             
+              <!-- Email validation start here -->
               
+              <div class="form-group">
+                <label for="exampleFormControlInput1">jobtitle</label>
+                <input type="jobtitle" class="form-control" placeholder="jobtitle" required  [(ngModel)]="databyid.jobtitle" required name="jobtitle" #jobtitle="ngModel" ngModel>
+              </div>
+              <div class="alert alert-danger" *ngIf="jobtitle.errors?.['required'] && jobtitle.touched">
+                jobtitle is required
+              </div>
+        
+              <div class="alert alert-danger" *ngIf="jobtitle.errors?.['jobtitle'] && jobtitle.touched">
+                the input must be jobtitle not string
+              </div>
+        <!-- Email validation end here -->
               
+        <!-- phone validation start here -->
+              
+        <div class="form-group">
+          <label for="exampleFormControlInput1">phone</label>
+          <input type="phone" class="form-control" placeholder="phone" required  [(ngModel)]="databyid.phone" required name="phone" #phone="ngModel" ngModel>
+        </div>
+        <div class="alert alert-danger" *ngIf="phone.errors?.['required'] && phone.touched">
+          phone is required
+        </div>
+  
+        <div class="alert alert-danger" *ngIf="phone.errors?.['phone'] && phone.touched">
+          the input must be phone not string
+        </div>
+  <!-- phone validation end here -->
+
+  <!-- githublink validation start here -->
+              
+  <div class="form-group">
+    <label for="exampleFormControlInput1">githublink</label>
+    <input type="githublink" class="form-control" placeholder="githublink" required  [(ngModel)]="databyid.githublink" required name="githublink" #githublink="ngModel" ngModel>
+  </div>
+  <div class="alert alert-danger" *ngIf="githublink.errors?.['required'] && githublink.touched">
+    githublink is required
+  </div>
+
+  <div class="alert alert-danger" *ngIf="githublink.errors?.['githublink'] && githublink.touched">
+    the input must be githublink not string
+  </div>
+<!-- githublink validation end here -->
+
+ <!-- linkedinlink validation start here -->
+              
+ <div class="form-group">
+  <label for="exampleFormControlInput1">linkedinlink</label>
+  <input type="linkedinlink" class="form-control" placeholder="linkedinlink" required  [(ngModel)]="databyid.linkedinlink" required name="linkedinlink" #linkedinlink="ngModel" ngModel>
+</div>
+<div class="alert alert-danger" *ngIf="linkedinlink.errors?.['required'] && linkedinlink.touched">
+  linkedinlink is required
+</div>
+
+<div class="alert alert-danger" *ngIf="linkedinlink.errors?.['linkedinlink'] && linkedinlink.touched">
+  the input must be linkedinlink not string
+</div>
+<!-- linkedinlink validation end here -->
+              
+
+<!-- description validation start here -->
+              
+<div class="form-group">
+  <label for="exampleFormControlInput1">description</label>
+  <input type="description" class="form-control" placeholder="description" required  [(ngModel)]="databyid.description" required name="description" #description="ngModel" ngModel>
+</div>
+<div class="alert alert-danger" *ngIf="description.errors?.['required'] && description.touched">
+  description is required
+</div>
+
+<div class="alert alert-danger" *ngIf="description.errors?.['description'] && description.touched">
+  the input must be description not string
+</div>
+<!-- description validation end here -->
+
+<!-- speacialty validation start here -->
+              
+<div class="form-group">
+  <label for="exampleFormControlInput1">speacialty</label>
+  <input type="speacialty" class="form-control" placeholder="speacialty" required  [(ngModel)]="databyid.speacialty" required name="speacialty" #speacialty="ngModel" ngModel>
+</div>
+<div class="alert alert-danger" *ngIf="speacialty.errors?.['required'] && speacialty.touched">
+  speacialty is required
+</div>
+
+<div class="alert alert-danger" *ngIf="speacialty.errors?.['speacialty'] && speacialty.touched">
+  the input must be speacialty not string
+</div>
+<!-- speacialty validation end here -->
+
+
+
               <div class="alert alert-success" *ngIf="messageSuccess">
                 {{messageSuccess}}
             </div>  
               
               
           
-                 <button class="btn btn-primary" [disabled]="f.invalid">Update student</button>
+                 <button class="btn btn-primary" >Update Suprevisor</button>
                 </form>          
      
     </div>
@@ -782,6 +917,47 @@
 </div>
 </div>
   <!--end of  Suprivisor Update Modal -->
+ <!-- Suprevisor Delete Confirmation Modal-->
+ <div class="modal"  id ="SuprivisorDeleteConfirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          Are you sure you want to delete this suprevisor ! 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
+        <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="deleteSuprivisor(selectedItem._id, selectedIndex); showModal=false;">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirmation Modal-->
+<div class="modal"  id ="CandidateDeleteConfirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          Are you sure you want to delete this candidate ! 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
+        <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="deleteCandidate(selectedItem._id, selectedIndex); showModal=false;">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script>

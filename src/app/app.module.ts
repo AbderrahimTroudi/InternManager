@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { InternshipApplicationComponent } from './views/preIntern/internship-application/internship-application.component';
 import { ApplicationStatusComponent } from './views/preIntern/application-status/application-status.component';
 import { InternshipDetailsComponent } from './views/preIntern/internship-details/internship-details.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +17,7 @@ import { InternManagmentComponent } from './views/suprivisor/intern-managment/in
 import { InternshipManagmentComponent } from './views/suprivisor/internship-managment/internship-managment.component';
 import { FormsModule } from '@angular/forms';
 import { ProgressTrackComponent } from './views/preIntern/progress-track/progress-track.component';
+import { HomeComponent } from './views/suprivisor/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { ProgressTrackComponent } from './views/preIntern/progress-track/progres
     InternManagmentComponent,
     InternshipManagmentComponent,
     ProgressTrackComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { ProgressTrackComponent } from './views/preIntern/progress-track/progres
     LayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

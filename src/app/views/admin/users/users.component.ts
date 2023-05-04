@@ -93,7 +93,7 @@ years=["2022,2023,2024,2025"]
         this.databyid = data;
       });
   }
-  UpdateCandidate(f: any) {
+  UpdateCandidate(f: any) { 
     let data = f.value;
     this.dataService.AddStudent(this.databyid, 'candidate/register').subscribe(
       (response) => {
@@ -139,25 +139,31 @@ console.log("candidate data : ",data)
 
   getbyidSuprivisor(id: any) {
     this.dataService
-      .getonestudent(id, 'suprivisor/getdetails/')
+      .getonestudent(id, 'suprivisor/getbyid/')
       .subscribe((data) => {
-        console.log(data);
         this.databyid = data;
       });
   }
   UpdateSuprivisor(f: any) {
     let data = f.value;
-    this.dataService.AddStudent(this.databyid, 'register').subscribe(
+    this.dataService.updateStudent(this.databyid,{data},'update/').subscribe(
       (response) => {
         let indexId = this.AllData.findIndex(
           (obj: any) => obj._id == this.databyid.id
         );
 
-        this.dataArray[indexId].name = data.name;
-        this.dataArray[indexId].email = data.email;
-        this.dataArray[indexId].password = data.password;
+        this.AllSuprivisor[indexId].name = data.name;
+        this.AllSuprivisor[indexId].email = data.email;
+        this.AllSuprivisor[indexId].password = data.password;
+        this.AllSuprivisor[indexId].role = data.role;
+        this.AllSuprivisor[indexId].jobtitle = data.jobtitle;
+        this.AllSuprivisor[indexId].phone = data.phone;
+        this.AllSuprivisor[indexId].githublink = data.githublink;
+        this.AllSuprivisor[indexId].linkedinlink = data.linkedinlink;
+        this.AllSuprivisor[indexId].description = data.description;
+        this.AllSuprivisor[indexId].speacialty = data.speacialty;
 
-        this.messageSuccess = `this student ${this.dataArray[indexId].name} is updated`;
+        this.messageSuccess = `this student ${this.AllSuprivisor[indexId].name} is updated`;
       },
       (err: HttpErrorResponse) => {
         console.log(err.message);
@@ -166,11 +172,7 @@ console.log("candidate data : ",data)
   }
 
   AddSuprivisor(f: any) {
-    console.log(f)
-    console.log("F value : ",f.value)
-
     let data = f.value;
-console.log("F value : ",data)
     let x = this.dataService.AddStudent(data, 'suprivisor/register/').subscribe(
       (response) => {
         this.dataService.getAllStudents('suprivisor/getall/').subscribe((data) => {
@@ -259,7 +261,18 @@ console.log("eeee",this.filter.some(item => year === date))
   getYearFromDate(date: string): string {
     return new Date(date).getFullYear().toString();
   }
-  
+
+
+  showModal=true;
+selectedItem: any;
+selectedIndex: any;
+openDeleteModal(item: any, i: number) {
+  this.selectedItem = item;
+  this.selectedIndex = i;
+
+}
+
+ 
 }
 
 interface candidate{

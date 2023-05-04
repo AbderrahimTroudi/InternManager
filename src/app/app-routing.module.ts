@@ -4,6 +4,7 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { LandingpageLayoutComponent } from './layout/landingpage-layout/landingpage-layout.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { SuprivisorLayoutComponent } from './layout/suprivisor-layout/suprivisor-layout.component';
+import { AdminAuthComponent } from './layout/admin-auth/admin-auth.component';
 
 const routes: Routes = [{
   path: '', 
@@ -12,8 +13,15 @@ const routes: Routes = [{
 
   ]
 },
+{
+  path: 'adminlogin', 
+  component: AdminAuthComponent
 
+},
 {path:'admin', component:AdminLayoutComponent,children:[
+
+  {path: 'dashboard',loadChildren: () => import('./views/admin/dashboard/dashboard.module').then(m => m.DashboardModule)},
+
     {path: 'users',loadChildren: () => import('./views/admin/users/users.module').then(m => m.UsersModule)},
     { path: 'suprivisorprofile/:id',loadChildren: () => import('./views/suprivisor/suprivisor-profile/suprivisor-profile.module').then(m => m.SuprivisorProfileModule)},
     {path: 'internships',loadChildren: () => import('./views/admin/internship/internship.module').then(m => m.InternshipModule)},
@@ -39,8 +47,10 @@ const routes: Routes = [{
 
 ]}, 
 {path:'suprivisor',component:SuprivisorLayoutComponent,children:[
+  {path:'home',loadChildren:()=>import('./views/suprivisor/home/home.module').then(m => m.HomeModule)},
+
   {path:'profile/:id',loadChildren:()=>import('./views/suprivisor/suprivisor-profile/suprivisor-profile.module').then(m => m.SuprivisorProfileModule)},
-  {path:'internsprogress',loadChildren:()=>import('./views/suprivisor/intern-managment/intern-managment.module').then(m => m.InternManagmentModule)}
+  {path:'internsprogress/:id',loadChildren:()=>import('./views/suprivisor/intern-managment/intern-managment.module').then(m => m.InternManagmentModule)}
 
 ]}
 ];

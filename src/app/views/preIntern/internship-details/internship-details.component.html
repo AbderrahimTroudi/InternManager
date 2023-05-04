@@ -1,20 +1,96 @@
 <ul *ngIf="dataObject">
-    <li>Title :{{ dataObject.title }}</li>
-    <li>description : {{ dataObject.description }}</li>
-    <li>requirements : {{ dataObject.requirements }}</li>
-    <li>duration_weeks : {{ dataObject.duration_weeks }}</li>
-    <li>start_date : {{ dataObject.start_date }}</li>
-    <li>end_date : {{ dataObject.end_date }}</li>
-    <li>max_candidates : {{ dataObject.max_candidates }}</li>
-    <li>spots_available : {{ dataObject.spots_available }}</li>
-    <li>status : {{ dataObject.status }}</li>
-
-</ul>
 
 <div class="alert alert-danger" *ngIf="messageErr">
     {{messageErr}}
 </div>
-<router-outlet></router-outlet>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+            <div class="card border-0 shadow">
+                <img src="../../../../assets/etcLogo.jpg" alt="...">
+                <div class="card-body p-1-9 p-xl-5">
+                    <div class="mb-4">
+                        <h3 class="h4 mb-0">Title :{{ dataObject.title }}</h3>
+                        <span class="text-primary">Mentor :{{ supervisorProfile.name }}</span>
+                        <br>
+                        <span class="text-primary">Category :{{ dataObject.category }}</span>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ps-lg-1-6 ps-xl-5">
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="h1 mb-0 text-primary">Description</h2>
+                    </div>
+                    <p> {{ dataObject.description }}</p>
+                </div>
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="mb-0 text-primary">More informations </h2>
+                    </div>
+                    <div class="row mt-n4">
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class="ti-timer icon-box medium rounded-3 mb-4"></i>
+                                    <h3 class="h5 mb-3">start date</h3>
+                                    <p class="mb-0">{{ dataObject.start_date }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class="ti-timer icon-box medium rounded-3 mb-4"></i>
+                                    <h3 class="h5 mb-3">End date</h3>
+                                    <p class="mb-0">{{ dataObject.end_date }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class="ti-lock icon-box medium rounded-3 mb-4"></i>
+                                    <h3 class="h5 mb-3">Status</h3>
+                                    <p class="mb-0">{{ dataObject.status }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class="ti-user icon-box medium rounded-3 mb-4"></i>
+                                    <h3 class="h5 mb-3">Max candidates</h3>
+                                    <p class="mb-0">{{ dataObject.max_candidates }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="card-body">
+                                    <i class="ti-user icon-box medium rounded-3 mb-4"></i>
+                                    <h3 class="h5 mb-3"> Spots available</h3>
+                                    <p class="mb-0">{{ dataObject.spots_available  }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="mb-0 text-primary">Required skills</h2>
+                    </div>
+                    <p class="mb-4">{{ dataObject.requirements }}</p>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-  
+</ul>

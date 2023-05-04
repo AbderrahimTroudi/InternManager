@@ -23,6 +23,6 @@ export class AdminLayoutComponent {
 
 logout(){
   localStorage.removeItem('token')
-  this.route.navigate(['auth/login'])
+  this.route.navigate(['adminlogin'])
 }
 }

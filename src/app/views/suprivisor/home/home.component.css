@@ -66,6 +66,7 @@ cursor:default;
     color: red ;
   }
   .carouselCss{
+   background-image: url('../../../../assets/adminAsset/img/bc3.png');
    background-repeat: no-repeat;
    background-size: 100rem 26rem;
 
@@ -158,17 +159,3 @@ transform: translateX(0);
 
 
   
-.custom-navbar{
-  background-color: #6538e0;
-}
-
-
-
-.preItemTitle{
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: red ;
-}
-.colorBtn{
-  background-color: #816f7d;
-}

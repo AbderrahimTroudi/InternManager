@@ -1,0 +1,95 @@
+
+<div *ngIf="CandidateData,MentorData">
+  
+    <select class="btnC"[(ngModel)]="currentInterval" (change)="updateAxis()">
+      <option value="month">Month</option>
+      <option value="day">Day</option>
+      <option value="year">Year</option>
+  
+    </select>
+  <div id="chart-container"></div>
+  <br>
+  
+  
+    </div>
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <div class="container">
+      <div id="chart-pie"style="width: 35%; height: 400px; float: right;"></div>
+  
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <h5 class="card-title"><span class="text-muted fw-normal ms-2">{{ ApplicationData.length }}</span> Internship Application </h5>
+              </div>
+            </div>
+            <div >
+              <a  class="btnC text-warning " (click)="ChangeTableDataToOnlySubmitted()">Submitted</a>
+              <a  class="btnC text-success" (click)="ChangeTableDataToOnlyAccepted()">Accepted</a>
+              <a  class="btnC text-danger"  (click)="ChangeTableDataToOnlyRefused()">Refused</a>
+              <a  class="btnC" (click)="ChangeTableDataToDisplayAll()">All</a>
+  
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="">
+                    <div class="table-responsive">
+                        <table class="table project-list-table table-nowrap align-middle table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="ps-4" style="width: 50px;">
+                                        <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
+                                    </th>
+                                    <th scope="col">Candidate Name</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Internship Name</th>
+     
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let item of pagedApplicationData">
+                                <tr>
+                                    <th scope="row" class="ps-4">
+                                        <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck1" /><label class="form-check-label" for="contacusercheck1"></label></div>
+                                    </th>
+                                    <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a  class="text-body">{{ item.candidate_name }}</a></td>
+                                    <td><span [ngClass]="{'text-warning': item.status === 'submitted', 'text-success': item.status === 'accepted', 'text-danger': item.status === 'refused'}">{{ item.status }}</span></td>
+                                    <td>{{ item.title }}</td>
+                                    <div class="status" style='color:#ddc946' *ngIf="isRecent(item.date)" > <i class="fa fa-circle"  ></i> new </div>                                            
+                                </tr>
+                       </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-0 align-items-center pb-4">
+            <div class="col-sm-6">
+                <div><p class="mb-sm-0">Showing 1 to 5 of {{ tableData.length }} entries</p></div>
+            </div>
+            
+  
+            <div class="col-sm-6">
+                <div class="float-sm-end">
+                    <ul class="pagination mb-sm-0">
+                      
+                        <div *ngFor="let item of totalPages">
+                        <li class="page-item "[ngClass]="{'active': currentPage === item}" ><a  class="page-link"   (click)="currentPage = item" >{{ item }}</a></li>
+                    
+                      </div>
+                        <!-- and so on... -->
+                     
+                    </ul>
+            </div>
+          </div>
+        </div>
+    </div>  

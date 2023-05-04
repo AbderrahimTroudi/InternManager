@@ -12,15 +12,24 @@ export class InternshipDetailsComponent {
   id=''
   dataObject:any
   messageErr=''
+  supervisorProfile:any
   constructor(private route:ActivatedRoute,private ds:ServicesService) {
     this.route.params.subscribe(params=>this.id=params['id'])
 
-    this.ds.getonestudent(this.id,"internship/getbyid/").subscribe(response=>this.dataObject=response,
+    this.ds.getonestudent(this.id,"internship/getbyid/").subscribe(response=>
+      {this.dataObject=response,this.getSuprevisorProfile(this.dataObject.suprivisorid)},
       (err:HttpErrorResponse)=>{console.log(err)
       this.messageErr="We dont't found this Internship in our database"})
-   }
-  
+      
    
+   
+    }
+  
+    getSuprevisorProfile(id:any){
+      console.log("the id : ",id)
+      this.ds.getsupbyid('suprivisor/getbyid/',id).subscribe((data)=>{this.supervisorProfile=data,console.log("data:",data)})
+        console.log("the result : ",this.supervisorProfile)
+    }
  
  
 }

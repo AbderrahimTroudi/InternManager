@@ -139,5 +139,13 @@ details(id:any){
     getAllSupervisors() {
    
     }
+showModal:any
+    selectedItem: any;
+selectedIndex: any;
+openAcceptModal(item: any, i: number) {
+  this.selectedItem = item;
+  this.selectedIndex = i;
+
+}
 
   }

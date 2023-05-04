@@ -28,9 +28,6 @@ export class ServicesService {
  }
  
  updateStudent(id:String,account:any,query:any){
-   console.log("id : ",id)
-   console.log("account : ",account)
-   console.log("query : ",query)
 
    return this.http.put('http://localhost:3000/crudapi/'+query+id,account)
  }

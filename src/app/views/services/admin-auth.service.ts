@@ -11,21 +11,18 @@ export class AdminAuthService {
   constructor(private http:HttpClient) { 
     
   }
-  login(data:any){
+  loginAdmin(data:any){
 console.log(data)
-    return this.http.post('http://localhost:3000/crudapi/auth/login',data)
+    return this.http.post('http://localhost:3000/crudapi/auth/loginadmin',data)
   } 
 
   LoggedIn(){
     let token:any=localStorage.getItem('token')
-    console.log("///admin AUTH service token//",token)
     if(!token){
      return false
     }
     this.decodedToken= jwt_decode(token);
    
-    console.log("///ROLE/// : ",this.decodedToken.role)
-
   if(this.decodedToken.role!=='admin'){
       return false
     }

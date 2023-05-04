@@ -39,8 +39,9 @@
                             <th>{{ item.title }}</th>
                             <th>
                                 <button class="btn btn-info m-2"  data-toggle="modal"  (click)="nav(item.candidate_ID)">Profile</button>
-                                <button class="btn btn-success m-2"   data-toggle="modal" data-target="#confirmation" (click)="accpet(item._id,i)"  [disabled]="buttonDisabled[i]">Accept</button>
-                                <button class="btn btn-danger m-2"  data-toggle="modal" (click)="refuse(item._id)" [disabled]="buttonDisabled" >Refuse</button>
+                                <button class="btn btn-success m-2" data-toggle="modal" data-target="#AcceptConfirmation"  (click)="openAcceptModal(item, i)"[disabled]="item.status === 'accepted' || item.status === 'refused' || buttonDisabled[i]">Accept</button>
+
+                                <button class="btn btn-danger m-2"  data-toggle="modal" data-target="#RefuseConfirmation"(click)="openAcceptModal(item, i)"  [disabled]="item.status === 'accepted' || item.status === 'refused' || buttonDisabled[i]" >Refuse</button>
 
 
 
@@ -57,8 +58,8 @@
 
 
     <!-- Detail Modal -->  
- <!-- Confirmation Modal -->
-<div class="modal"  id ="confirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+ <!-- Accept Confirmation Modal -->
+<div class="modal"  id ="AcceptConfirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -68,16 +69,36 @@
           </button>
         </div>
         <div class="modal-body">
-          Are you sure you want to proceed with this action?
+            Are you sure you want to refuse this application ! 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
-          <button type="button" class="btn btn-primary" >Confirm</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="accpet(selectedItem._id, selectedIndex);disableButton(selectedIndex); showModal=false;">Accept</button>
         </div>
       </div>
     </div>
   </div>
   
+  <!-- Refuse confirmation-->
+  <div class="modal"  id ="RefuseConfirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Action</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Are you sure you want to refuse this application ! 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
+          <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="accpet(selectedItem._id, selectedIndex);disableButton(selectedIndex); showModal=false;">Refuse</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
