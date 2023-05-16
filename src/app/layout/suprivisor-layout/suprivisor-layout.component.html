@@ -12,20 +12,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="btn btn-primary" routerLink='/landingpage/home'>Home <span class="sr-only">(current)</span></a>
+              <a class="btn btn-primary" routerLink='/suprivisor/home'>Home <span class="sr-only">(current)</span></a>
             </li>
           </ul>
           
           <div class="form-inline my-2 my-lg-0">
             <button *ngIf="!loggedIn" class="btn btn-primary my-2 m-2 my-sm-0" routerLink='/auth/register'>Register</button>
-            <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" >Profile</button>
+            <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn"(click)="navProfile()" >Profile</button>
       
-            <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" routerLink='/landingpage/applicationstatus'>My applications</button>
-            <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" >My progress</button>
+            <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" (click)="navMeetRequest()">Meet request</button>
+            <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" (click)="navProgress()" >Interns progress</button>
       
       
             <button  *ngIf="!loggedIn" class="btn btn-secondary my-2 m-2 my-sm-0" routerLink='/auth/login' >Login</button>
-            <button  *ngIf="loggedIn" class="btn btn-danger my-2 m-2 my-sm-0" >Logout</button>
+            <button  *ngIf="loggedIn" class="btn btn-danger my-2 m-2 my-sm-0" (click)="logout()">Logout</button>
       
           </div>
         </div>

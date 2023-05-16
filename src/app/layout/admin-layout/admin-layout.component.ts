@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/views/services/auth.service';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminLayoutComponent {
+  adminname:any
   constructor(private adminservice:AdminAuthService,private route:Router,private arouter:ActivatedRoute) {
     console.log(this.adminservice.LoggedIn())
     if(this.adminservice.LoggedIn()==true){
@@ -18,11 +19,20 @@ export class AdminLayoutComponent {
     this.route.navigate(['/auth/login'])
 
   }
-
+this.adminname = this.adminservice.getAdminName()
 }
 
 logout(){
   localStorage.removeItem('token')
   this.route.navigate(['adminlogin'])
+}
+
+navToInternArchive(){
+  this.route.navigate(['/admin/internarchive'])
+
+}
+navToSupervisorArchive(){
+  this.route.navigate(['/admin/supervisorarchive'])
+
 }
 }

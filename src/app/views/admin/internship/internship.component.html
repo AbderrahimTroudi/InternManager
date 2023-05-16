@@ -3,9 +3,7 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-        For more information about DataTables, please visit the <a target="_blank"
-            href="https://datatables.net">official DataTables documentation</a>.</p>
+ 
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -51,8 +49,8 @@
                             <th>{{ item.category }}</th>
 
                             <th>
-                                <button class="btn btn-success" (click)="getdata(item.title,item.status,item.requirements,item.duration_weeks,item.spots_available,item._id)" data-toggle="modal" data-target="#UpdateModal">Update</button>
-                                <button class="btn btn-info m-2" (click)="details(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
+                                <button class="btn btn-success" (click)="getbyidInternship(item._id)" data-toggle="modal" data-target="#UpdateModal">Update</button>
+                                <button class="btn btn-info m-2" (click)="getbyidInternship(item._id)" data-toggle="modal" data-target="#DetailModal">Details</button>
                                 <button class="btn btn-danger m-2" data-toggle="modal" data-target="#DeleteConfirmation"(click)="openAcceptModal(item, i)">Delete</button>
 
                             </th>
@@ -80,17 +78,17 @@
         </div>
         <div class="modal-body">
             
-            <ul *ngIf="all">
-                <li>ID :{{ all._id }}</li>
-                <li>title :{{ all.title }}</li>
-                <li>description :{{ all.description }}</li>
-                <li>requirements :{{ all.requirements }}</li>
-                <li>duration_weeks :{{ all.duration_weeks }}</li>
-                <li>start_date :{{ all.start_date }}</li>
-                <li>end_date :{{ all.end_date }}</li>
-                <li>max_candidates :{{ all.max_candidates }}</li>
-                <li>spots_available :{{ all.spots_available }}</li>
-                <li>status :{{ all.status }}</li>
+            <ul *ngIf="databyid">
+                <li>ID :{{ databyid._id }}</li>
+                <li>title :{{ databyid.title }}</li>
+                <li>description :{{ databyid.description }}</li>
+                <li>requirements :{{ databyid.requirements }}</li>
+                <li>duration_weeks :{{ databyid.duration_weeks }}</li>
+                <li>start_date :{{ databyid.start_date }}</li>
+                <li>end_date :{{ databyid.end_date }}</li>
+                <li>max_candidates :{{ databyid.max_candidates }}</li>
+                <li>spots_available :{{ databyid.spots_available }}</li>
+                <li>status :{{ databyid.status }}</li>
 
             </ul>
             
@@ -118,7 +116,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <form #f="ngForm" (ngSubmit)="AddUser(f)">
+            <form #x="ngForm" (ngSubmit)="AddUser(x)">
              
                      <!-- title validation start here -->
                      <div class="form-group">
@@ -274,7 +272,7 @@
                 
                 
             
-                   <button class="btn btn-primary" [disabled]="f.invalid">Add student</button>
+                   <button class="btn btn-primary" [disabled]="x.invalid">Add student</button>
                   </form>          
        
       </div>
@@ -302,3 +300,162 @@
       </div>
     </div>
   </div>
+
+  <!-- Update Modal -->
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form #dd="ngForm" (ngSubmit)="UpdateUser(dd)">
+           
+                   <!-- title validation start here -->
+                   <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">title</label>
+                      <input type="text" class="form-control" placeholder="title" required [(ngModel)]="databyid.title" name="title" #name="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                 
+
+                     <!-- description validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">description</label>
+                      <input type="text" class="form-control" placeholder="description" required [(ngModel)]="databyid.description" name="description" #description="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="description.errors?.['required'] && description.touched">
+                      description is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="description.errors?.['minlength'] && description.touched">
+                      description must be minimum 2 caractere
+                    </div>
+
+                     <!-- requirements validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">requirements</label>
+                      <input type="text" class="form-control" placeholder="requirements" required [(ngModel)]="databyid.requirements" name="requirements" #requirements="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="requirements.errors?.['required'] && requirements.touched">
+                      requirements is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="requirements.errors?.['minlength'] && requirements.touched">
+                      requirements must be minimum 2 caractere
+                    </div>
+
+                     <!-- duration_weeks validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">duration_weeks</label>
+                      <input type="text" class="form-control" placeholder="duration_weeks" required [(ngModel)]="databyid.duration_weeks" name="duration_weeks" #duration_weeks="ngModel" ngModel minlength="1" maxlength="2">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="duration_weeks.errors?.['required'] && duration_weeks.touched">
+                      duration_weeks is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="duration_weeks.errors?.['minlength'] && duration_weeks.touched">
+                      duration_weeks must be minimum 2 caractere
+                    </div>
+
+                     <!-- start_date validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">start_date</label>
+                      <input type="text" class="form-control" placeholder="start_date" required  [(ngModel)]="databyid.start_date" name="start_date" #start_date="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="start_date.errors?.['required'] && start_date.touched">
+                      start_date is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="start_date.errors?.['minlength'] && start_date.touched">
+                      start_date must be minimum 2 caractere
+                    </div>
+
+                     <!-- end_date validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">end_date</label>
+                      <input type="text" class="form-control" placeholder="end_date" [(ngModel)]="databyid.end_date" required name="end_date" #end_date="ngModel" ngModel minlength="2" maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="end_date.errors?.['required'] && end_date.touched">
+                      end_date is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="end_date.errors?.['minlength'] && end_date.touched">
+                      end_date must be minimum 2 caractere
+                    </div>
+
+                     <!-- max_candidates validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">max_candidates</label>
+                      <input type="text" class="form-control" placeholder="max_candidates"  [(ngModel)]="databyid.max_candidates" required name="max_candidates" #max_candidates="ngModel" ngModel  maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="max_candidates.errors?.['required'] && max_candidates.touched">
+                      max_candidates is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="max_candidates.errors?.['minlength'] && max_candidates.touched">
+                      max_candidates must be minimum 2 caractere
+                    </div>
+
+                     <!-- spots_available validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">spots_available</label>
+                      <input type="text" class="form-control" placeholder="spots_available" required  [(ngModel)]="databyid.spots_available"  name="spots_available" #spots_available="ngModel" ngModel  maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="spots_available.errors?.['required'] && spots_available.touched">
+                      spots_available is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="spots_available.errors?.['minlength'] && spots_available.touched">
+                      spots_available must be minimum 2 caractere
+                    </div>
+
+                  
+
+                     <!-- status validation start here -->
+                  <div class="form-group">
+              
+                      <label for="exampleFormControlInput1">status</label>
+                      <input type="text" class="form-control" placeholder="status" required   [(ngModel)]="databyid.status"  name="status" #status="ngModel" ngModel maxlength="20">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="status.errors?.['required'] && status.touched">
+                      status is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="status.errors?.['minlength'] && status.touched">
+                      status must be minimum 2 caractere
+                    </div>
+
+                   
+               
+                    <div class="form-group">
+              
+                  
+                   
+            
+                     </div>
+                
+                    
+            
+              
+              <div class="alert alert-success" *ngIf="messageSuccess">
+                {{messageSuccess}}
+             
+            </div> 
+            <div class="alert alert-danger" *ngIf="messageErr">
+             
+              {{ messageErr }}
+          </div>  
+             
+              
+              
+          
+                 <button class="btn btn-primary" [disabled]="dd.invalid">Add student</button>
+                </form>          
+     
+    </div>
+  </div>
+</div>
+</div>

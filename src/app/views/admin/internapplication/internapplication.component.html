@@ -35,7 +35,7 @@
                     </tfoot>
                     <tbody>
                         <tr *ngFor="let item of dataArray;index as i ">
-                            <th>{{ item.candidate_name }}</th>
+                            <th>{{ item.candidate_name }}</th><!-- here you can change the name by a function that look for the candidate id and return its name because if the candidate updated his name it will not be changed here-->
                             <th>{{ item.title }}</th>
                             <th>
                                 <button class="btn btn-info m-2"  data-toggle="modal"  (click)="nav(item.candidate_ID)">Profile</button>

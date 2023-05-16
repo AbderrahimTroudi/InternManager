@@ -41,6 +41,7 @@ years=["2022,2023,2024,2025"]
       console.log(data);
       this.databyid = data;
       this.AllData = data;
+      console.log("?????",this.AllData)
       this.filter= this.AllData
       console.log("Suprivisor number :",this.countSupervisors())
     });
@@ -48,12 +49,15 @@ years=["2022,2023,2024,2025"]
       //get all suprivisors
       this.dataService.getAllStudents("suprivisor/getall").subscribe(data=>{
         this.AllSuprivisor=data
-  
-
-
       })
+
+
+
+      
   }
-  ngOnInit(): void {}
+ 
+  ngOnInit(): void {    
+  }
 
   countSupervisors() {
     let count = 0;
@@ -129,6 +133,8 @@ console.log("candidate data : ",data)
     );
   }
 
+
+
   /////////////////////Suprivisor part ///////////////////
   deleteSuprivisor(id: any, i: number) {
     this.dataService.DeleteStudent(id, 'suprivisor/delete/').subscribe((response) => {
@@ -138,39 +144,77 @@ console.log("candidate data : ",data)
   }
 
   getbyidSuprivisor(id: any) {
+    this.messageSuccess=""
     this.dataService
       .getonestudent(id, 'suprivisor/getbyid/')
       .subscribe((data) => {
         this.databyid = data;
+        console.log("Databyid works fine: ",this.databyid)
+
       });
   }
   UpdateSuprivisor(f: any) {
+    console.log("Update Data : ",f)
+
     let data = f.value;
-    this.dataService.updateStudent(this.databyid,{data},'update/').subscribe(
+    console.log("Update Data : ",data)
+    console.log("Update Data : ",data.name)
+
+    this.dataService.updateStudent(this.databyid._id,data,'suprivisor/update/').subscribe(
       (response) => {
-        let indexId = this.AllData.findIndex(
-          (obj: any) => obj._id == this.databyid.id
-        );
+      
+        this.databyid.name = data.name;
+        this.databyid.email = data.email;
+        this.databyid.password = data.password;
+        this.databyid.role = data.role;
+        this.databyid.jobtitle = data.jobtitle;
+        this.databyid.phone = data.phone;
+        this.databyid.githublink = data.githublink;
+        this.databyid.linkedinlink = data.linkedinlink;
+        this.databyid.description = data.description;
+        this.databyid.speacialty = data.speacialty;
+   
+        console.log("response : ",response)
 
-        this.AllSuprivisor[indexId].name = data.name;
-        this.AllSuprivisor[indexId].email = data.email;
-        this.AllSuprivisor[indexId].password = data.password;
-        this.AllSuprivisor[indexId].role = data.role;
-        this.AllSuprivisor[indexId].jobtitle = data.jobtitle;
-        this.AllSuprivisor[indexId].phone = data.phone;
-        this.AllSuprivisor[indexId].githublink = data.githublink;
-        this.AllSuprivisor[indexId].linkedinlink = data.linkedinlink;
-        this.AllSuprivisor[indexId].description = data.description;
-        this.AllSuprivisor[indexId].speacialty = data.speacialty;
-
-        this.messageSuccess = `this student ${this.AllSuprivisor[indexId].name} is updated`;
+        this.messageSuccess = `this student ${this.databyid.name} is updated`;
+        this.dataService.getAllStudents("suprivisor/getall").subscribe(res=>{
+          this.AllSuprivisor=res
+        });
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
+    );
+   
+  }
+  
+  deleteCandidateIncandidateList(supervisorId: string, i:number) {
+    console.log("id",supervisorId,"index",i)
+    this.dataService.deleteCandidateIncandidateList(supervisorId, i,'suprivisor/delete/').subscribe(
+      (response) => {
+        this.databyid.listofcandidate.splice(i, 1);
+        this.messageSuccess = `Candidate with ID ${i} has been deleted from the supervisor with ID ${supervisorId}`;
       },
       (err: HttpErrorResponse) => {
         console.log(err.message);
       }
     );
   }
-
+  deleteInternshipInInternshipList(supervisorId: string, i:number) {
+    this.messageSuccess=""
+    console.log("id",supervisorId,"index",i)
+    this.dataService.deleteInternshipInInternshipList(supervisorId, i,'suprivisor/delete/').subscribe(
+      (response) => {
+        this.databyid.listofinternship.splice(i, 1);
+        this.messageSuccess = `Candidate with ID ${i} has been deleted from the supervisor with ID ${supervisorId}`;
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
+    );
+  }
+  
+  
   AddSuprivisor(f: any) {
     let data = f.value;
     let x = this.dataService.AddStudent(data, 'suprivisor/register/').subscribe(
@@ -271,8 +315,30 @@ openDeleteModal(item: any, i: number) {
   this.selectedIndex = i;
 
 }
+openArchiveModal(item: any, i: number) {
+  this.selectedItem = item;
+  this.selectedIndex = i;
 
- 
+}
+archiveSupervisor(supervisor:any,index:any){
+  console.log(supervisor)
+this.dataService.archiveSupervisor(supervisor,"supervisorarchive/addtoarchive").subscribe(
+  data=>{
+    console.log(data),
+    this.deleteSuprivisor(supervisor._id,index)
+  
+  })
+
+}
+archiveIntern(intern:any,index:any){
+  console.log(intern)
+  this.dataService.archiveSupervisor(intern,"internarchive/addtoarchive").subscribe(
+    data=>{
+      console.log(data),
+      this.deleteCandidate(intern._id,index)
+    
+    })
+}
 }
 
 interface candidate{

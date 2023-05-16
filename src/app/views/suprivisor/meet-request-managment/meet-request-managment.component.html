@@ -1,0 +1,78 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card chat-app">
+            <div id="plist" class="people-list">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Search" [(ngModel)]="seachText">
+
+                <ul class="list-unstyled chat-list mt-2 mb-0">
+                  
+                    <ng-container *ngFor="let item of filterCandidates(seachText)">
+                    <div  *ngIf="!item.response">
+                    
+                      <a (click)="showProgressById(item)">
+                        <li class="clearfix">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                        <div class="about">
+
+                            <div class="name">{{ item.candidate_name }}</div>
+                         
+                          </div>
+                    </li>
+                  </a></div>
+                </ng-container>
+                </ul>
+            </div>
+            <div class="chat">
+                <div class="chat-header clearfix">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <h4 class="chat-title">Reqeust</h4>
+                    </div>
+            
+                  </div>
+                </div>
+                <div class="chat-history">
+                  <ul class="m-b-0">
+                      <div class="card" *ngIf="requestById">                             
+                       
+                    
+                        <div class="card-header">{{ requestById.date | date: 'MMM d, y'  }}
+                          <div class="status" style='color:#2187c6' *ngIf="isRecent(requestById.date)" > <i class="fa fa-circle"  ></i> new </div>                                            
+
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                              <li>  Reason : {{ requestById.reason }}</li>
+                              <li>Availability : {{ requestById.availability }}</li>
+                              <li>Type : {{ requestById.type }}</li>
+                              <li *ngIf="CommentButton">Response : </li>
+                              <li *ngIf="CommentButton"><input type="text" class="form-control" [(ngModel)]="ResponseComment"></li>
+                            </ul>
+                    <br>
+                            <li>
+                              <button class=" btn btn-success m-1" (click)="AccpetTheRequest(requestById._id,ResponseComment)">Accept </button>
+                            <button class="btn btn-danger m-1" (click)="RefuseTheRequest(requestById._id,ResponseComment)">Refuse </button> 
+                            <button class="btn btn-info m-1" (click)="CommentButton = !CommentButton ">Responde </button> 
+
+                          </li>
+                            </div>
+
+                            
+
+                      </div>
+                  </ul>
+                </div>
+                <div class="chat-message clearfix">
+                  <div class="input-group mb-0">
+                    <div class="input-group-prepend">
+                     
+              
+    </div>
+</div>
+</div>

@@ -3,6 +3,7 @@
     grid-template-columns: repeat(2,1fr);
     gap:2.5rem;
   }
+  
   .port__item{
     background: var(--color-bg-light);
     padding: 1.3rem;

@@ -14,13 +14,22 @@ export class SuprivisorLayoutComponent {
   id=''
   constructor(private service:ServicesService,private asd:AuthService,private route:Router,private arouter:ActivatedRoute) {
     console.log("Login check",this.asd.MentorLoggedIn())
+    if(this.asd.MentorLoggedIn()==true){
+      this.loggedIn=true;
+  }
+  else{
+    this.route.navigate(['/adminlogin'])
+
+  }
+
+
     const token = localStorage.getItem('token');
     if (token !== null) {
       this.decodedToken= jwt_decode(token);
       this.id=this.decodedToken._id
     }
     if(this.asd.MentorLoggedIn()==true){
-      this.route.navigate(['/suprivisor/internprogress/',this.id])
+
     }
   else{
     this.route.navigate(['/auth/login'])
@@ -30,7 +39,7 @@ export class SuprivisorLayoutComponent {
    }
    logout(){
     localStorage.removeItem('token');
-    this.route.navigate(['auth/login'])
+    this.route.navigate(['adminlogin'])
 
    }
   nav(route:any){
@@ -38,10 +47,15 @@ export class SuprivisorLayoutComponent {
   }
   navProfile(){
     
-    this.route.navigate(['landingpage/profile',this.id])
+    this.route.navigate(['suprivisor/profile',this.id])
   }
   navProgress(){
-    
-    this.route.navigate(['landingpage/progress',this.id])
+  
+    this.route.navigate(['/suprivisor/internsprogress/',this.id])
+
+  }
+  navMeetRequest(){
+    this.route.navigate(['/suprivisor/meetrequest/',this.id])
+
   }
 }

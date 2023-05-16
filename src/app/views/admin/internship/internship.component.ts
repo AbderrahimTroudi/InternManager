@@ -60,7 +60,15 @@ export class InternshipComponent implements OnInit {
       })
   
     }
-  
+  databyid:any
+  getbyidInternship(id: any) {
+    this.dataService
+      .getonestudent(id, 'internship/getbyid/')
+      .subscribe((data) => {
+        console.log(data);
+        this.databyid = data;
+      });
+  }
     getdata(title:string,status:string,requirements:string,duration_weeks:string,spots_available:string,id:any){
       this.messageSuccess=''
       this.InternshipData.title=title
@@ -75,10 +83,10 @@ export class InternshipComponent implements OnInit {
   
     UpdateUser(f:any){
       let data=f.value
-      this.dataService.AddStudent(this.InternshipData,"internship/register").subscribe(response=>
+      this.dataService.updateStudent(this.databyid._id,data,"internship/update/").subscribe(response=>
         {
   
-          let indexId=this.AllData.findIndex((obj:any)=>obj._id==this.InternshipData.id)
+          let indexId=this.AllData.findIndex((obj:any)=>obj._id==this.databyid._id)
   
           this.dataArray[indexId].title=data.title
           this.dataArray[indexId].description=data.description

@@ -67,7 +67,7 @@ details(id:any){
     })
     }
 nav(id:any){
-      this.route.navigate(['admin/profile/',id])
+      this.route.navigate(['admin/candidateprofile/',id])
     }
     disableButton(i:any){
 

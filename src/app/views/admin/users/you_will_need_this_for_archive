@@ -1,0 +1,44 @@
+ <ng-container *ngFor="let yearCandidates of groupedCandidates | keyvalue">
+                        <td>{{ yearCandidates.key }}</td>
+                      
+                        <ng-container *ngFor="let candidate of yearCandidates.value ">
+                          <tr *ngIf="candidate.role === 'user' || candidate.role === 'intern'">
+                            <td>{{ candidate.nameFL }}</td>
+                            <td>{{ candidate.email }}</td>
+                            <td>{{ candidate.skills }}</td>
+                            <td>{{ candidate.phone }}</td>
+                            <td>
+                              <button class="btn btn-info" (click)="openCandidateProfile(candidate._id)">Profile</button>
+                              <button class="btn btn-outline-primary m-2" (click)="getbyidCandidate(candidate._id)" data-toggle="modal" data-target="#CandidateDetailModal">Details</button>
+                              <button class="btn btn-danger m-2" data-toggle="modal" data-target="#CandidateDeleteConfirmation" (click)="openDeleteModal(candidate,1)">Delete</button>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                      
+
+
+
+                      <!-- component : 
+                    
+                    groupedCandidates: {[year: string]: any[]} = {};
+
+  groupCandidatesByYear() {
+    console.log("AllData: ///// ::",this.AllData);
+
+    const allCandidates = this.AllData.filter((candidate: { date: any; }) => candidate.date);
+    console.log("allCandidates: ///// ::",allCandidates);
+
+    allCandidates.forEach((candidate: { date:any; }) => {
+      const year = new Date(candidate.date).getFullYear();
+      if (!this.groupedCandidates[year]) {
+        this.groupedCandidates[year] = [candidate];
+      } else {
+        this.groupedCandidates[year].push(candidate);
+      }
+    });
+  
+    console.log("groupedCandidates: ///// ::",this.groupedCandidates);
+    // return the groupedCandidates array or assign it to a component variable
+  }
+  -->

@@ -18,6 +18,9 @@ import { InternshipManagmentComponent } from './views/suprivisor/internship-mana
 import { FormsModule } from '@angular/forms';
 import { ProgressTrackComponent } from './views/preIntern/progress-track/progress-track.component';
 import { HomeComponent } from './views/suprivisor/home/home.component';
+import { MeetRequestManagmentComponent } from './views/suprivisor/meet-request-managment/meet-request-managment.component';
+import { SupervisorArchiveComponent } from './views/admin/supervisor-archive/supervisor-archive.component';
+import { InternArchiveComponent } from './views/admin/intern-archive/intern-archive.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +32,9 @@ import { HomeComponent } from './views/suprivisor/home/home.component';
     InternshipManagmentComponent,
     ProgressTrackComponent,
     HomeComponent,
+    MeetRequestManagmentComponent,
+    SupervisorArchiveComponent,
+    InternArchiveComponent,
   ],
   imports: [
     BrowserModule,

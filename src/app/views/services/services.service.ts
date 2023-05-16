@@ -27,7 +27,18 @@ export class ServicesService {
    return this.http.delete('http://localhost:3000/crudapi/'+query+id)
  }
  
+ deleteCandidateIncandidateList(idSuprevisor:String,idCandidate:any,query:any){
+   
+  return this.http.delete('http://localhost:3000/crudapi/'+query+idSuprevisor+'/candidate/'+idCandidate)
+}
+deleteInternshipInInternshipList(idSuprevisor:String,internshipIndex:any,query:any){
+   
+  return this.http.delete('http://localhost:3000/crudapi/'+query+idSuprevisor+'/internship/'+internshipIndex)
+}
  updateStudent(id:String,account:any,query:any){
+console.log("the service id ",id)
+console.log("the account id ",account)
+console.log("the query id ",query)
 
    return this.http.put('http://localhost:3000/crudapi/'+query+id,account)
  }
@@ -55,6 +66,39 @@ addProgress(query:any,progress:any,id:any){
   return this.http.post('http://localhost:3000/crudapi/'+query+id,body)
 
 }
+
+addMeetRequest(account:any,query:any,internID:any,internname:any){
+  console.log(account)
+    return this.http.post('http://localhost:3000/crudapi/'+query+internID+'/'+internname,account)
+  }
+  AccpetTheRequest(idRequest:any,comment:any,query:any){
+    const body = {
+      comment: comment,
+      response: "accepted"
+    }
+    return this.http.put('http://localhost:3000/crudapi/'+query+idRequest,body)
+  }
+  RefuseTheRequest(idRequest:any,comment:any,query:any){
+    const body = {
+      comment: comment,
+      response: "refused"
+    }
+    return this.http.put('http://localhost:3000/crudapi/'+query+idRequest,body)
+  }
+
+
+
+
+  archiveIntern(account:any,query:any){
+      return this.http.post('http://localhost:3000/crudapi/'+query,account)
+    }
+
+    archiveSupervisor(account:any,query:any){
+        return this.http.post('http://localhost:3000/crudapi/'+query,account)
+      }
+
+
+
  //////////////////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////////////////
  searchbar(query:any){

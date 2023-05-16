@@ -26,7 +26,9 @@ const routes: Routes = [{
     { path: 'suprivisorprofile/:id',loadChildren: () => import('./views/suprivisor/suprivisor-profile/suprivisor-profile.module').then(m => m.SuprivisorProfileModule)},
     {path: 'internships',loadChildren: () => import('./views/admin/internship/internship.module').then(m => m.InternshipModule)},
     {path: 'Internshipapplications',loadChildren: () => import('./views/admin/internapplication/internapplication.module').then(m => m.InternapplicationModule)},
-    {path:'profile/:id',loadChildren:()=>import('./views/profile/profile.module').then(m=> m.ProfileModule)},
+    {path:'candidateprofile/:id',loadChildren:()=>import('./views/profile/profile.module').then(m=> m.ProfileModule)},
+    {path:'internarchive',loadChildren:()=>import('./views/admin/intern-archive/intern-archive.module').then(m=> m.InternArchiveModule)},
+    {path:'supervisorarchive',loadChildren:()=>import('./views/admin/supervisor-archive/supervisor-archive.module').then(m=> m.SupervisorArchiveModule)},
 
   ]
 },
@@ -48,6 +50,7 @@ const routes: Routes = [{
 ]}, 
 {path:'suprivisor',component:SuprivisorLayoutComponent,children:[
   {path:'home',loadChildren:()=>import('./views/suprivisor/home/home.module').then(m => m.HomeModule)},
+  {path:'meetrequest/:id',loadChildren:()=>import('./views/suprivisor/meet-request-managment/meet-request-managment.module').then(m => m.MeetRequestManagmentModule)},
 
   {path:'profile/:id',loadChildren:()=>import('./views/suprivisor/suprivisor-profile/suprivisor-profile.module').then(m => m.SuprivisorProfileModule)},
   {path:'internsprogress/:id',loadChildren:()=>import('./views/suprivisor/intern-managment/intern-managment.module').then(m => m.InternManagmentModule)}

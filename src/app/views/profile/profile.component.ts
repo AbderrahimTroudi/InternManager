@@ -39,4 +39,13 @@ export class ProfileComponent {
       this.databyid = data;
     });
   }
+  UpdateCandidateProfile(f:any){
+    let data = f.value
+    this.dataService
+    .updateStudent(this.databyid._id,data, 'candidate/update/')
+    .subscribe((data) => {
+      console.log("/////details/////",data);
+      this.databyid = data;
+    });
+  }
 }

@@ -20,9 +20,9 @@
                     <div class="mt-3">
                       <h4>{{ databyid.name }}</h4>
                       <p class="text-secondary mb-1">{{ databyid.jobtitle }}</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                    <!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                       <button class="btn btn-primary">Follow</button>
-                      <button class="btn btn-outline-primary">Message</button>
+                      <button class="btn btn-outline-primary">Message</button>--> 
                     </div>
                   </div>
                 </div>
@@ -170,7 +170,7 @@
           </div>
           <div class="modal-body">
 <!--MODAL BODY-->
-<form #f="ngForm" (ngSubmit)="updateSuprivisorProfile(f,databyid._id)">
+<form #ffs="ngForm" (ngSubmit)="updateSuprivisorProfile(ffs,databyid._id)">
   <div class="col-lg-8">
       <div class="card">
         <div class="card-body">
@@ -179,7 +179,7 @@
               <h6 class="mb-0">Full Name</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input type="text" class="form-control" [value]="databyid.name">
+              <input type="text" class="form-control" placeholder="name" required [(ngModel)]="databyid.name" name="name" #name="ngModel" ngModel >
             </div>
           </div>
           <div class="row mb-3">
@@ -187,7 +187,7 @@
               <h6 class="mb-0">Email</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input type="text" class="form-control" [value]="databyid.email">
+              <input type="text" class="form-control" placeholder="email" required [(ngModel)]="databyid.email" name="email" #email="ngModel" ngModel >
             </div>
           </div>
           <div class="row mb-3">
@@ -195,7 +195,7 @@
               <h6 class="mb-0">Phone</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input type="text" class="form-control" [value]="databyid.phone">
+              <input type="text" class="form-control" placeholder="phone" required [(ngModel)]="databyid.phone" name="phone" #phone="ngModel" ngModel >
             </div>
           </div>
           <div class="row mb-3">
@@ -203,7 +203,7 @@
               <h6 class="mb-0">github link</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input type="text" class="form-control" [value]="databyid.githublink">
+              <input type="text" class="form-control" placeholder="githublink" required [(ngModel)]="databyid.githublink" name="githublink" #githublink="ngModel" ngModel >
             </div>
           </div>
           <div class="row mb-3">
@@ -211,9 +211,18 @@
               <h6 class="mb-0">linkedin link</h6>
             </div>
             <div class="col-sm-9 text-secondary">
-              <input type="text" class="form-control" [value]="databyid.linkedinlink">
+              <input type="text" class="form-control" placeholder="linkedinlink" required [(ngModel)]="databyid.linkedinlink" name="linkedinlink" #linkedinlink="ngModel" ngModel >
             </div>
           </div>
+          <div class="row mb-3">
+            <div class="col-sm-3">
+              <h6 class="mb-0">Jobtitle</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input type="text" class="form-control" placeholder="jobtitle" required [(ngModel)]="databyid.jobtitle" name="jobtitle" #jobtitle="ngModel" ngModel >
+            </div>
+          </div>
+
 
           <div class="row">
             <div class="col-sm-3"></div>
@@ -225,7 +234,9 @@
       </div>
 
     </div>
-                  <button class="btn btn-primary" [disabled]="f.invalid">Add student</button>
+                  <button class="btn btn-primary" data-dismiss="modal" [disabled]="ffs.invalid">update</button>
+                  <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
 
   </form>
 <!--MODAL BODY END -->

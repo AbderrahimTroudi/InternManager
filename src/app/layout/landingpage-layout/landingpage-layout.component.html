@@ -1,3 +1,4 @@
+
 <!-- TopNavBad -->
 <nav class="custom-navbar navbar navbar-expand-lg navbar-light p-3 ">
   <a class="navbar-brand " href="#landingpage">
@@ -31,24 +32,143 @@
 
 <!-- carousel-->
  
-<button *ngIf="loggedIn" (click)="toggleCard()" class="btn btn-primary rounded-circle position-fixed" style="bottom: 30px; right: 20px; font-size: 26px;">
+<button *ngIf="loggedIn" (click)="toggleProgressAndMeetRequest()" class="btn btn-primary rounded-circle position-fixed" style="bottom: 30px; right: 20px; font-size: 26px;">
   <i class="bi bi-list-check"></i>
 </button>
 
-<div *ngIf="cardVisible" class="card position-fixed" style="bottom: 80px; right: 20px; width: 300px; z-index: 3;">
-  <div class="card-body">
-    <h5 class="card-title">Add a progress</h5>
-    <p class="card-text">Make it simple and send the details threw the.</p>
-    <div class="form-group">
-      <label for="progressInput">Enter title:</label>
-      <input type="text" class="form-control" id="progressInput" [(ngModel)]="progressTitle">
-      <label for="progressInput">Enter progress description (keep it tight):</label>
-      <input type="text" class="form-control" id="progressInput" [(ngModel)]="progressDescription">
-    </div>
-    <button class="btn btn-primary" (click)="addProgress()">Add</button>
+<div *ngIf="ProgressAndMeetRequestVisible">
+  <button *ngIf="loggedIn" (click)="toggleProgress()" class="btnC  position-fixed" style="bottom: 90px; right: 20px;">
+    <div>Add progress</div>
+  </button>
+  
+    <button *ngIf="loggedIn" (click)="toggleMeetrequest()" class="btnC  position-fixed" style="bottom: 145px; right: 20px;">
+      <i class="bi bi-clipboard-check">Request a meet</i>
+    </button>
+
+
+    
+  <div *ngIf="ProgresscardVisible" class="card position-fixed" style="bottom: 90px; right: 20px; width: 300px; z-index: 3;">
+    <div class="card-body">
+      <h5 class="card-title">Add a progress</h5>
+      <p class="card-text">Make it simple and send the details threw the.</p>
+      <div class="form-group">
+        <label for="progressInput">Enter title:</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="progressTitle">
+        <label for="progressInput">Enter progress description (keep it tight):</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="progressDescription">
+      </div>
+      <button class="btn btn-primary" (click)="addProgress()">Add</button>
+      <button class="btn btn-primary" (click)="toggleProgress()">Cancel</button>
+
+    </div>  
   </div>
+
+  <div *ngIf="MeetrequestcardVisible" class="card position-fixed" style="bottom: 150px; right: 20px; width: 300px; z-index: 3;">
+    <div class="card-body">
+      <h5 class="card-title">Request a meet </h5>
+      <div class="form-group">
+        <label for="progressInput">Reason for the meet * :</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="MeetReason">
+        <label for="progressInput">Enter a description (option):</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="MeetDescription">
+        <label for="progressInput">what time are you available on ?</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="availability">
+        <label for="progressInput">choose the place ?</label>
+
+        <select name="category "class="form-control"  [(ngModel)]="place" >
+          <option>online</option>
+          <option>in the office</option>
+        </select>
+
+      </div>
+      <button class="btn btn-primary" (click)="Request_a_Meet()">Add</button>
+      <button class="btn btn-primary" (click)="toggleMeetrequest()">Cancel</button>
+
+    </div>
+  </div>
+
+
+
+  <div *ngIf="MeetrequestTablecardVisible" class="card position-fixed" style="bottom: 150px; right: 20px; width: 300px; z-index: 3;">
+    <div class="card-body">
+      <h5 class="card-title">Request a meet </h5>
+      <div class="form-group">
+        <label for="progressInput">Reason for the meet * :</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="MeetReason">
+        <label for="progressInput">Enter a description (option):</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="MeetDescription">
+        <label for="progressInput">what time are you available on ?</label>
+        <input type="text" class="form-control" id="progressInput" [(ngModel)]="availability">
+        <label for="progressInput">choose the place ?</label>
+
+        <select name="category "class="form-control"  [(ngModel)]="place" >
+          <option>online</option>
+          <option>in the office</option>
+        </select>
+     
+      </div>
+      <button class="btn btn-primary" (click)="Request_a_Meet()">Add</button>
+      <button class="btn btn-primary" (click)="MeetTableVisible()">Cancel</button>
+     
+    </div>
+  </div>
+
+
+
+
+
+  <button *ngIf="loggedIn" (click)="getTableRequest()" data-toggle="modal" data-target="#RequestTableModal" class="btnC  position-fixed" style="bottom: 200px; right: 20px;">
+    <i class="bi bi-clipboard-check">Meet Requests</i>
+  </button>
+
+  <div class="modal fade" id="RequestTableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">All your requests</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                  <th>Reason</th>
+                  <th>Response</th>
+                  <th>Comment</th>
+
+                  <th>Action</th>
+
+                </tr>
+            </thead>
+           
+            <tbody>
+              <tr *ngFor="let item of RequestTableData,index as i ">
+      <th>{{ item.reason }}</th>
+      <th>{{ item.response }}</th>
+      <th>{{ item.comment }}</th>
+
+      <button class="btn btn-danger m-2" (click)="deleteRequest(item._id,i)">delete</button>
+              </tr> 
+              
+            </tbody>
+            <div class="alert alert-success" *ngIf="messagesucc">
+              {{messagesucc}}
+          </div>
+        </table>      
+       
+      </div>
+    </div>
+  </div>
+  </div>
+
+  
+
+
+
+
 </div>
 
- 
 <router-outlet></router-outlet>
 

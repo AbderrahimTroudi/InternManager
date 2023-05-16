@@ -108,7 +108,6 @@
             <h6 class="m-0 font-weight-bold text-primary">Candidate Users</h6>
         </div>
         <div class="card-body">
-            <a data-toggle="modal" data-target="#AddModalCandidate"class="btn btn-primary  m-2" style="float: right">Add</a>
             <div class="table-responsive">
             
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -145,6 +144,7 @@
                                 <button class="btn btn-info" (click)="openCandidateProfile(item._id)">Profile</button>
                                 <button class="btn btn-outline-primary m-2" (click)="getbyidCandidate(item._id)" data-toggle="modal" data-target="#CandidateDetailModal">Details</button>
                                 <button class="btn btn-danger m-2" data-toggle="modal" data-target="#CandidateDeleteConfirmation" (click)="openDeleteModal(item,i)" >Delete</button>
+                                <button class="btnC"  data-toggle="modal" data-target="#InternArchiveModal" (click)="openArchiveModal(item,i)" >Archive</button>
 
                             </th>
 </ng-container>
@@ -198,6 +198,7 @@
                               <button class="btn btn-success" (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#UpdateModalSuprivisor">Update</button>
                               <button class="btn btn-outline-primary m-2"  (click)="getbyidSuprivisor(item._id)" data-toggle="modal" data-target="#SuprevisorDetailModal">Details</button>
                               <button class="btn btn-danger m-2" data-toggle="modal" data-target="#SuprivisorDeleteConfirmation" (click)="openDeleteModal(item,i)" >Delete</button>
+                              <button class="btnC"  data-toggle="modal" data-target="#SuprevisorArchiveModal" (click)="openArchiveModal(item,i)" >Archive</button>
 
                           </th>
 </ng-container>
@@ -212,76 +213,9 @@
   
 
 
-
-
-
-
-   
-<!-- carousel test -->
-<section class="pt-5 pb-5">
-  <div class="container">
-      <div class="row">
-          <div class="col-6">
-              <h3 class="mb-3">Carousel cards title </h3>
-          </div>
-          <div class="col-6 text-right">
-              <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                  <i class="fa fa-arrow-left"></i>
-              </a>
-              <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-                  <i class="fa fa-arrow-right"></i>
-              </a>
-          </div>
-          <div class="col-12">
-              <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-
-                  <div class="carousel-inner">
-                    
-                      <div class="carousel-item">
-                          <div class="row">
-
-                              <div class="col-md-4 mb-3">
-                                  <div class="card">
-                                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
-                                      <div class="card-body">
-                                          <h4 class="card-title">Special title treatment</h4>
-                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-                                      </div>
-
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="card">
-                                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-                                      <div class="card-body">
-                                          <h4 class="card-title">Special title treatment</h4>
-                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-md-4 mb-3">
-                                  <div class="card">
-                                      <img class="img-fluid" alt="100%x280" src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
-                                      <div class="card-body">
-                                          <h4 class="card-title">Special title treatment</h4>
-                                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-<!-- carousel test -->
-
               
  <!-- <div class="Mycontainer">
+
     <div *ngFor="let item of AllSuprivisor,index as i ">
       <ng-container *ngIf="item.role === 'suprivisor'">
     <div class="row">
@@ -312,13 +246,8 @@
     
 </ng-container>
 </div>-->
-
-
-                      
-
-
-
- <!-- <div class="Mycontainer">
+ 
+<!-- <div class="Mycontainer">
     <div *ngFor="let item of AllSuprivisor,index as i ">
       <ng-container *ngIf="item.role === 'suprivisor'">
     <div class="row">
@@ -351,11 +280,6 @@
 </div>
 
 </div>-->
-
-
-
-
-
 
 
   <!--//////////////////////////////////////////////////////    MODALS     /////////////////////////////////////////////////////////////////-->
@@ -426,7 +350,7 @@
                 </ul>
             
             </ul>
-            <button href="#" class="btn btn-primary" (click)="getResume(databyid._id)" target="_blank">Resume</button>
+            <button href="#" class="btn btn-primary"data-dismiss="modal" (click)="openSuprivisorProfile(databyid._id)" target="_blank">Profile</button>
             <div class="alert alert-danger" *ngIf="messageErr">
                 {{messageErr}}
             </div>
@@ -439,81 +363,6 @@
     </div>
   </div>
 <!-- END Suprevisor Detail Modal -->  
-
- <!-- Candidate Add Modal (this is is optional and propebly you will delete it )-->
- <div class="modal fade" id="AddModalCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form #g="ngForm" (ngSubmit)="AddCandidate(g)">
-                <!-- name validation start here -->
-                    <div class="form-group">
-                
-                      <label for="exampleFormControlInput1">name</label>
-                      <input type="text" class="form-control" placeholder="name" required name="name" #name="ngModel" ngModel minlength="2" maxlength="20">
-                    </div>
-                    <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched">
-                      name is required
-                    </div>
-                    <div class="alert alert-danger" *ngIf="name.errors?.['minlength'] && name.touched">
-                      name must be minimum 2 caractere
-                    </div>
-                <!-- password validation end here -->
-                
-                
-                
-                <!-- Email validation start here -->
-                
-                      <div class="form-group">
-                        <label for="exampleFormControlInput1">email</label>
-                        <input type="email" class="form-control" placeholder="email" email  required name="email" #email="ngModel" ngModel>
-                      </div>
-                      <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
-                        email is required
-                      </div>
-                
-                      <div class="alert alert-danger" *ngIf="email.errors?.['email'] && email.touched">
-                        the input must be email not string
-                      </div>
-                <!-- Email validation end here -->
-                
-                
-                <!-- password validation start here -->
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">password</label>
-                  <input type="password" class="form-control" placeholder="password" required name="password" #password="ngModel" ngModel>
-                </div>
-                <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
-                  password is required
-                </div>
-                <div class="alert alert-danger" *ngIf="password.errors?.['minlength'] && password.touched">
-                  password must be minimum 2 caractere
-                </div>
-                <!-- password validation end here -->
-                
-                
-                
-                
-                <div class="alert alert-success" *ngIf="messageSuccess">
-                  {{messageSuccess}}
-              </div>  
-                
-                
-            
-                   <button class="btn btn-primary" [disabled]="f.invalid">Add student</button>
-                  </form>          
-       
-      </div>
-    </div>
-  </div>
-</div>
- <!-- end of Candidate Add Modal (this is is optional and propebly you will delete it )-->
 
  <!-- Suprivisor Add Modal -->
 
@@ -675,83 +524,7 @@
 </div>
  <!--end of Suprivisor Add Modal -->
 
-
-  <!-- Candidate Update Modal -->
-  <div class="modal fade" id="UpdateModalCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form #f="ngForm" (ngSubmit)="UpdateCandidate(f)">
-                <!-- name validation start here -->
-                    <div class="form-group">
-                
-                      <label for="exampleFormControlInput1">name</label>
-                      <input type="text" class="form-control" placeholder="name" required [(ngModel)]="databyid.name" name="name" #name="ngModel" ngModel minlength="2" maxlength="20">
-                    </div>
-                    <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched">
-                      name is required
-                    </div>
-                    <div class="alert alert-danger" *ngIf="name.errors?.['minlength'] && name.touched">
-                      name must be minimum 2 caractere
-                    </div>
-                <!-- password validation end here -->
-                
-                
-                
-                <!-- Email validation start here -->
-                
-                      <div class="form-group">
-                        <label for="exampleFormControlInput1">email</label>
-                        <input type="email" class="form-control" placeholder="email" email  [(ngModel)]="databyid.email" required name="email" #email="ngModel" ngModel>
-                      </div>
-                      <div class="alert alert-danger" *ngIf="email.errors?.['required'] && email.touched">
-                        email is required
-                      </div>
-                
-                      <div class="alert alert-danger" *ngIf="email.errors?.['email'] && email.touched">
-                        the input must be email not string
-                      </div>
-                <!-- Email validation end here -->
-                
-                
-                <!-- password validation start here -->
-                <div class="form-group">
-                  <label for="exampleFormControlInput1">password</label>
-                  <input type="password" class="form-control" placeholder="password" required name="password" [(ngModel)]="databyid.password" #password="ngModel" minlength="2" maxlength="20" ngModel>
-                </div>
-                <div class="alert alert-danger" *ngIf="password.errors?.['required'] && password.touched">
-                  password is required
-                </div>
-                <div class="alert alert-danger" *ngIf="password.errors?.['minlength'] && password.touched">
-                  password must be minimum 2 caractere
-                </div>
-                <!-- password validation end here -->
-                
-              
-                
-                
-                <div class="alert alert-success" *ngIf="messageSuccess">
-                  {{messageSuccess}}
-              </div>  
-                
-                
-            
-                   <button class="btn btn-primary" [disabled]="f.invalid">Update student</button>
-                  </form>          
-       
-      </div>
-    </div>
-  </div>
-</div>
-  <!-- end of Candidate Update Modal -->
-
-  <!-- Suprivisor Update Modal -->
+<!-- Suprivisor Update Modal  -->
 
 <div class="modal fade" id="UpdateModalSuprivisor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -763,7 +536,7 @@
         </button>
       </div>
       <div class="modal-body">
-          <form #f="ngForm" (ngSubmit)="UpdateSuprivisor(f)">
+          <form #Mentor="ngForm" (ngSubmit)="UpdateSuprivisor(Mentor)">
               <!-- name validation start here -->
                   <div class="form-group">
               
@@ -900,7 +673,21 @@
   the input must be speacialty not string
 </div>
 <!-- speacialty validation end here -->
-
+<div class="form-group">
+  <label for="exampleFormControlInput1">speacialty</label>
+  <li><b>Candidates:</b></li>
+  <ul *ngFor="let candidate of databyid.listofcandidate,index as i ">
+    <li >{{ candidate[0] }}</li>
+    <button type="button" class="btn btn-danger"(click)="deleteCandidateIncandidateList(databyid._id, i); showModal=false;">Delete</button>
+  </ul>
+  <br>
+  <li><b>Internships:</b></li>
+ 
+  <ul *ngFor="let internship of databyid.listofinternship,index as x ">
+    <li >{{ internship[0] }}</li>
+    <button type="button" class="btn btn-danger"(click)="deleteInternshipInInternshipList(databyid._id, x); showModal=false;">Delete</button>
+  </ul>
+</div>
 
 
               <div class="alert alert-success" *ngIf="messageSuccess">
@@ -917,6 +704,8 @@
 </div>
 </div>
   <!--end of  Suprivisor Update Modal -->
+
+
  <!-- Suprevisor Delete Confirmation Modal-->
  <div class="modal"  id ="SuprivisorDeleteConfirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -938,7 +727,7 @@
   </div>
 </div>
 
-<!-- Delete confirmation Modal-->
+<!-- Candidate Delete confirmation Modal-->
 <div class="modal"  id ="CandidateDeleteConfirmation"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -958,6 +747,49 @@
     </div>
   </div>
 </div>
+
+<!-- Suprevisor Archive Confirmation Modal-->
+<div class="modal"  id ="SuprevisorArchiveModal"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         Note that this supervisor will be deleted from users table and move to archive !!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
+        <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="archiveSupervisor(selectedItem,selectedIndex); showModal=false;">Archive</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Candidate Archive Confirmation Modal-->
+<div class="modal"  id ="InternArchiveModal"tabindex="-1" role="dialog" [ngClass]="{'show': showModal}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Action</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showModal=false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         Note that this intern will be deleted from users table and move to archive !!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
+        <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="archiveIntern(selectedItem,selectedIndex); showModal=false;">Archive</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <script>

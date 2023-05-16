@@ -28,4 +28,7 @@ console.log(data)
     }
     return true
   }
+  getAdminName(){
+    return this.decodedToken.name
+  }
 }

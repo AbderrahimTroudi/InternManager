@@ -47,7 +47,13 @@ export class SuprivisorProfileComponent {
   }
   updateSuprivisorProfile(f:any,id:any){
     const data=f.value;
-    this.dataService.updateStudent(data,id,'')
+    console.log("/////data/////",data);
+    console.log("/////id/////",id);
+
+    this.dataService.updateStudent(id,data,'suprivisor/update/').subscribe((res) => {
+      console.log("/////details/////",res);
+      this.databyid = res;
+    });
   }
 
 }
