@@ -1,0 +1,5 @@
+.bgimage{
+    background-image: url('../../../assets/biglogo.jpg');;
+    background-position: center;
+    background-size: cover;
+}

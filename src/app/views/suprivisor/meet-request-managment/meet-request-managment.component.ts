@@ -40,7 +40,7 @@ filterCandidates(searchText: string): any[] {
   if (!searchText) {
     return this.allrequestdata;
   }
-  
+ 
   return this.allrequestdata.filter((candidate: { candidate_name: string; }) => 
     candidate.candidate_name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -100,7 +100,7 @@ console.log("one single item",this.requestById)
     return diffInHours <= 24;
   }
   hasRecentProgress(progressList: any[]): boolean {
-    console.log(progressList)
+    console.log("het its me ",progressList)
   const currentDate = new Date();
   for (let i = 0; i < progressList.length; i++) {
     const dateAdd = new Date(progressList[i].dateAdd);

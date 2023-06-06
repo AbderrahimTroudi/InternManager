@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
@@ -15,7 +17,7 @@
                         <li class="mb-3"><a ><i class="fas fa-mobile-alt display-25 me-3 text-secondary"></i> {{ databyid.phone }}</a></li>
                     </ul>
                     <ul class="social-icon-style2 ps-0">
-                        <li><a   data-toggle="modal" data-target="#UpdateModalCandidateProfile" class="rounded-3"><i class="far fa-edit"></i></a></li>
+                        <li><a   data-toggle="modal" *ngIf="editable" data-target="#UpdateModalCandidateProfile" class="rounded-3"><i class="far fa-edit"></i></a></li>
                         
                     </ul>
                 </div>
@@ -55,22 +57,23 @@
                     <div class="progress-style1">
                         <div class="progress-text">
                             <div class="row">
-                                <div class="col-6 fw-bold">Wind Turbines</div>
-                                <div class="col-6 text-end">70%</div>
-                                <div class="form-group">
+                            
+                                <div class="form-group"  style="font-size: 30px;">
                                     <li><b>progress:</b></li>
                                     <ul *ngFor="let progress of databyid.progressList,index as i ">
-                                      <li >{{ progress.title}}</li>
+                                      <li>{{ progress.title}}</li>
                                      
                                     </ul>
                                 
-                                  </div>
+                                   
                             </div>
                         </div>
                
                     </div>
+                    
                 </div>
             </div>
+            
         </div>
     </div>
 </div>

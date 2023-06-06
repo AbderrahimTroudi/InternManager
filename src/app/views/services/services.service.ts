@@ -18,6 +18,10 @@ export class ServicesService {
  console.log(account)
    return this.http.post('http://localhost:3000/crudapi/'+query,account)
  }
+addInternshipBySupervisor(account:any,query:any,id:any){
+  console.log(account)
+    return this.http.post('http://localhost:3000/crudapi/'+query+id,account)
+  }
  getdetails(id:any,query:any){
   return this.http.get('http://localhost:3000/crudapi/'+query+id)
 
@@ -43,6 +47,7 @@ console.log("the query id ",query)
    return this.http.put('http://localhost:3000/crudapi/'+query+id,account)
  }
  getonestudent(id:any,query:any){
+  console.log("this is the id ",id)
    return this.http.get('http://localhost:3000/crudapi/'+query+id)
  
  }

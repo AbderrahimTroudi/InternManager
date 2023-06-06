@@ -21,6 +21,13 @@ import { HomeComponent } from './views/suprivisor/home/home.component';
 import { MeetRequestManagmentComponent } from './views/suprivisor/meet-request-managment/meet-request-managment.component';
 import { SupervisorArchiveComponent } from './views/admin/supervisor-archive/supervisor-archive.component';
 import { InternArchiveComponent } from './views/admin/intern-archive/intern-archive.component';
+import { AddInternshipComponent } from './views/suprivisor/add-internship/add-internship.component';
+
+
+import { CommonModule } from '@angular/common';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +42,7 @@ import { InternArchiveComponent } from './views/admin/intern-archive/intern-arch
     MeetRequestManagmentComponent,
     SupervisorArchiveComponent,
     InternArchiveComponent,
+    AddInternshipComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +51,9 @@ import { InternArchiveComponent } from './views/admin/intern-archive/intern-arch
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ToastrModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

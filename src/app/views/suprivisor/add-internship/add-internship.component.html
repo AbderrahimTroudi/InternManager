@@ -2,7 +2,7 @@
  <div class="container-fluid">
 
     <!-- Page Heading -->
-
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
  
 
     <!-- DataTales Example -->
@@ -11,7 +11,10 @@
             <h6 class="m-0 font-weight-bold text-primary">Internship </h6>
         </div>
         <div class="card-body">
-            <a data-toggle="modal" data-target="#AddModal"class="btn btn-primary  m-2" style="float: right">Add</a>
+          <button type="button" class="button m-2" data-toggle="modal" data-target="#AddModal" style="float: right">
+            <span class="button__text">Add Item</span>
+            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+          </button>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -89,6 +92,8 @@
                 <li>max_candidates :{{ databyid.max_candidates }}</li>
                 <li>spots_available :{{ databyid.spots_available }}</li>
                 <li>status :{{ databyid.status }}</li>
+                <li>status :{{ databyid.category }}</li>
+
 
             </ul>
             
@@ -253,10 +258,7 @@
   
                        </select>
                        </div>
-                      <select (change)="getAllSupervisors()" name="suprivisorid" #suprivisorid="ngModel" ngModel>
-                        <option value="">Select a Supervisor</option>
-                        <option *ngFor="let supervisor of supervisors" [value]="supervisor._id">{{supervisor.name}}</option>
-                      </select>
+              
                       
               
                 
@@ -272,7 +274,7 @@
                 
                 
             
-                   <button class="btn btn-primary" [disabled]="x.invalid">Add student</button>
+                   <button class="btn btn-primary" [disabled]="x.invalid">Add internship</button>
                   </form>          
        
       </div>
@@ -295,7 +297,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModal=false">Cancel</button>
-          <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="delete(selectedItem._id,selectedIndex); showModal=false;">Refuse</button>
+          <button type="button" class="btn btn-danger"data-dismiss="modal" (click)="delete(selectedItem._id,selectedIndex); showModal=false;">Delete</button>
         </div>
       </div>
     </div>
@@ -418,7 +420,7 @@
                      <!-- status validation start here -->
                   <div class="form-group">
               
-                      <label for="exampleFormControlInput1">status</label>
+                      <label for="exampleFormControlInpsupervisorssut1">status</label>
                       <input type="text" class="form-control" placeholder="status" required   [(ngModel)]="databyid.status"  name="status" #status="ngModel" ngModel maxlength="20">
                     </div>
                     <div class="alert alert-danger" *ngIf="status.errors?.['required'] && status.touched">
@@ -427,6 +429,19 @@
                     <div class="alert alert-danger" *ngIf="status.errors?.['minlength'] && status.touched">
                       status must be minimum 2 caractere
                     </div>
+
+                       <!-- category validation start here -->
+                  <div class="form-group">
+              
+                    <label for="exampleFormControlInput1">category</label>
+                    <input type="text" class="form-control" placeholder="category" required   [(ngModel)]="databyid.category"  name="category" #category="ngModel" ngModel maxlength="20">
+                  </div>
+                  <div class="alert alert-danger" *ngIf="category.errors?.['required'] && category.touched">
+                    category is required
+                  </div>
+                  <div class="alert alert-danger" *ngIf="category.errors?.['minlength'] && category.touched">
+                    category must be minimum 2 caractere
+                  </div>
 
                    
                
@@ -459,3 +474,4 @@
   </div>
 </div>
 </div>
+

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServicesService } from '../services/services.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,16 +15,20 @@ export class ProfileComponent {
   messageSuccess = '';
   dataArray: any = [];
   messageErr = '';
-
+editable=false
   databyid: any;
 
   constructor(
+    private asd:AuthService,
+
     private dataService: ServicesService,
     private route: Router,
     private http: HttpClient,
     private Route: ActivatedRoute
   ) {
-    
+    if(this.asd.LoggedIn()==true){
+      this.editable=true;
+  }
   }
   ngOnInit() {
     this.Route.params.subscribe(params => {

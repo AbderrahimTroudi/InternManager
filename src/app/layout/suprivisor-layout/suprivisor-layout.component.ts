@@ -35,12 +35,10 @@ export class SuprivisorLayoutComponent {
     this.route.navigate(['/auth/login'])
 
   }
-  
    }
    logout(){
     localStorage.removeItem('token');
     this.route.navigate(['adminlogin'])
-
    }
   nav(route:any){
     this.route.navigate([route])

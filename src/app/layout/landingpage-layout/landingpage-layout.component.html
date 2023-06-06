@@ -11,40 +11,46 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="btn btn-primary" routerLink='/landingpage/home'>Home <span class="sr-only">(current)</span></a>
+        <a class="buttonCustom " style="background-color: #c2aff6;" routerLink='/landingpage/home'>Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     
     <div class="form-inline my-2 my-lg-0">
-      <button *ngIf="!loggedIn" class="btn btn-primary my-2 m-2 my-sm-0" routerLink='/auth/register'>Register</button>
-      <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" (click)="navProfile()">Profile</button>
+      
+      <button *ngIf="!loggedIn" class="buttonCustom" routerLink='/auth/register'>Register</button>
+      <button *ngIf="loggedIn" class=" colorBtn" (click)="navProfile()">Profile</button>
 
-      <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" routerLink='/landingpage/applicationstatus'>My applications</button>
-      <button *ngIf="loggedIn" class="btn btn-success my-2 m-2 my-sm-0 colorBtn" (click)="navProgress()">My progress</button>
+      <button *ngIf="loggedIn" class=" colorBtn" routerLink='/landingpage/applicationstatus'>Applications</button>
+      <button *ngIf="loggedIn" class=" colorBtn" (click)="navProgress()">Progress</button>
 
 
-      <button  *ngIf="!loggedIn" class="btn btn-secondary my-2 m-2 my-sm-0" routerLink='/auth/login' >Login</button>
+      <button  *ngIf="!loggedIn" class="buttonCustom" style="background-color: #c2aff6;" routerLink='/auth/login' >Login</button>
       <button  *ngIf="loggedIn" class="btn btn-danger my-2 m-2 my-sm-0" (click)="logout()">Logout</button>
 
     </div>
   </div>
 </nav>
 
-<!-- carousel-->
  
-<button *ngIf="loggedIn" (click)="toggleProgressAndMeetRequest()" class="btn btn-primary rounded-circle position-fixed" style="bottom: 30px; right: 20px; font-size: 26px;">
-  <i class="bi bi-list-check"></i>
-</button>
+<div *ngIf="loggedIn" (click)="toggleProgressAndMeetRequest()" class="position-fixed" style="bottom: 30px; right: 20px; font-size: 26px;">
+  <button   class="cssbuttons-io">
+    <span>  <i class="bi bi-list-check"></i>
+    </span>
+  </button>
+</div>
 
 <div *ngIf="ProgressAndMeetRequestVisible">
-  <button *ngIf="loggedIn" (click)="toggleProgress()" class="btnC  position-fixed" style="bottom: 90px; right: 20px;">
+  <button *ngIf="loggedIn" (click)="toggleProgress()" class="buttonCustom  position-fixed" style="bottom: 120px; right: 20px;">
     <div>Add progress</div>
   </button>
   
-    <button *ngIf="loggedIn" (click)="toggleMeetrequest()" class="btnC  position-fixed" style="bottom: 145px; right: 20px;">
-      <i class="bi bi-clipboard-check">Request a meet</i>
+    <button *ngIf="loggedIn" (click)="toggleMeetrequest()" class="buttonCustom  position-fixed" style="bottom: 175px; right: 20px;">
+      <div>Request a meet</div>
     </button>
 
+    <button *ngIf="loggedIn" (click)="getTableRequest()" data-toggle="modal" data-target="#RequestTableModal" class="buttonCustom  position-fixed" style="bottom: 230px; right: 20px;">
+      <div>Meet Requests</div>
+    </button>
 
     
   <div *ngIf="ProgresscardVisible" class="card position-fixed" style="bottom: 90px; right: 20px; width: 300px; z-index: 3;">
@@ -117,9 +123,6 @@
 
 
 
-  <button *ngIf="loggedIn" (click)="getTableRequest()" data-toggle="modal" data-target="#RequestTableModal" class="btnC  position-fixed" style="bottom: 200px; right: 20px;">
-    <i class="bi bi-clipboard-check">Meet Requests</i>
-  </button>
 
   <div class="modal fade" id="RequestTableModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

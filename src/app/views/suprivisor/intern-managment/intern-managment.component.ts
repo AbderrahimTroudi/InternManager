@@ -51,18 +51,26 @@ filterCandidates(searchText: string): any[] {
       this.databyid = data;
       this.listOfCandidateID = this.databyid.listofcandidate;
       this.getCandidateDetails();
+      console.log("listOfCandidate 2 : ", this.listOfCandidateID);
 
     });
-    
+ 
   }
+  
   getCandidateDetails() {
-    const requests = this.listOfCandidateID.map((id: any) => this.dataService.getonestudent(id, 'candidate/getdetails/'));
-    
+    const requests = this.listOfCandidateID.map((id: any) =>
+      this.dataService.getonestudent(id[1], 'candidate/getdetails/')
+    );
+  
     forkJoin(requests).subscribe(candidates => {
+      console.log("listOfCandidate: ", candidates);
       this.listOfCandidate = candidates;
-      console.log("listOfCandidate: ", this.listOfCandidate);
+      console.log("listOfCandidate 1: ", this.listOfCandidate);
     });
+   
+
   }
+  
 
   showProgressById(item:any){
 this.progressHold = item

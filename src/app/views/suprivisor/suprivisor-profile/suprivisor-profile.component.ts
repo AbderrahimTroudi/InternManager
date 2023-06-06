@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from '../../services/services.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-suprivisor-profile',
@@ -14,6 +15,7 @@ export class SuprivisorProfileComponent {
   messageSuccess = '';
   dataArray: any = [];
   messageErr = '';
+  editable=false;
   bars = [
     { name: 'Web Design', value: 80 },
     { name: 'Website Markup', value: 72 },
@@ -23,12 +25,16 @@ export class SuprivisorProfileComponent {
   ];
   databyid: any;
   constructor(
+    private asd:AuthService,
     private dataService: ServicesService,
     private route: Router,
     private http: HttpClient,
     private Route: ActivatedRoute
   ) {
-    
+    console.log("Login check",this.asd.MentorLoggedIn())
+    if(this.asd.MentorLoggedIn()==true){
+      this.editable=true;
+  }
   }
   ngOnInit() {
     this.Route.params.subscribe(params => {

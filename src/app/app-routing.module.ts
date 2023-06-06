@@ -53,7 +53,8 @@ const routes: Routes = [{
   {path:'meetrequest/:id',loadChildren:()=>import('./views/suprivisor/meet-request-managment/meet-request-managment.module').then(m => m.MeetRequestManagmentModule)},
 
   {path:'profile/:id',loadChildren:()=>import('./views/suprivisor/suprivisor-profile/suprivisor-profile.module').then(m => m.SuprivisorProfileModule)},
-  {path:'internsprogress/:id',loadChildren:()=>import('./views/suprivisor/intern-managment/intern-managment.module').then(m => m.InternManagmentModule)}
+  {path:'internsprogress/:id',loadChildren:()=>import('./views/suprivisor/intern-managment/intern-managment.module').then(m => m.InternManagmentModule)},
+  {path:'addinternship/:id',loadChildren:()=>import('./views/suprivisor/add-internship/add-internship.module').then(m => m.AddInternshipModule)}
 
 ]}
 ];

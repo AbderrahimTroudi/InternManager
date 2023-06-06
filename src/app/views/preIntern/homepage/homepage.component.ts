@@ -3,6 +3,7 @@ import { ServicesService } from '../../services/services.service';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-homepage',
@@ -43,7 +44,7 @@ this.showSupervisorInfo[index] = true;
     
   ]
   supervisorProfile:any
-  constructor(private asd:AuthService, private dataService: ServicesService,private route:Router,private http: HttpClient,private Route:ActivatedRoute) {
+  constructor(private toastr: ToastrService,private asd:AuthService, private dataService: ServicesService,private route:Router,private http: HttpClient,private Route:ActivatedRoute) {
 // initialize the array with false values for all cards
 
     this.dataService.getAllStudents("internship/getall").subscribe(
@@ -65,7 +66,9 @@ this.showSupervisorInfo[index] = true;
         item.title.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
         item.status.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         item.requirements.toLowerCase().includes(this.searchTerm.toLowerCase())
+
       );
+
       }, (err: any) => {
         console.log(err);
       });
@@ -84,7 +87,10 @@ this.showSupervisorInfo[index] = true;
     };
   console.log({headers})
     return this.http.post('http://localhost:3000/crudapi/candidate/apply/'+id,{title},{headers})
-    .subscribe((res)=>console.log(res),err=>{this.messageAuthError="You have already applied for this internship",console.log(err)})
+    .subscribe((res)=>{console.log(res),   
+       this.toastr.success('Done', 'Applied successfuly!'),
+       this.messageAuthError="";
+  },err=>{this.messageAuthError="You have already applied for this internship",console.log(err)})
   }
   hasItems(category: string): boolean {
     return this.filteredData.some(item => item.category === category);
@@ -99,6 +105,7 @@ this.showSupervisorInfo[index] = true;
     console.log("the id : ",id)
     this.dataService.getsupbyid('suprivisor/getbyid/',id).subscribe((data)=>{this.supervisorProfile=data,console.log("data:",data)})
       console.log("the result : ",this.supervisorProfile)
+
   }
 
 

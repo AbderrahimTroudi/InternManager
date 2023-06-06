@@ -21,7 +21,7 @@
                         <div class="about">
 
                             <div class="name">{{ item.candidate_name }}</div>
-                         
+                           <div class="status" style='color:#2187c6' *ngIf="isRecent(item.date)" > <i class="fa fa-circle"  ></i> new </div>   
                           </div>
                     </li>
                   </a></div>

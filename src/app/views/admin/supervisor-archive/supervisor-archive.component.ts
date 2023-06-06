@@ -25,9 +25,7 @@ export class SupervisorArchiveComponent implements OnInit  {
 
 
   ngOnInit(): void {
-   
 
-  
   }
   getbyidCandidate(id: any) {
     this.dataService

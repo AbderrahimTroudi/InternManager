@@ -5,6 +5,7 @@ import { AdminAuthService } from 'src/app/views/services/admin-auth.service';
 import { AuthService } from 'src/app/views/services/auth.service';
 import { ServicesService } from 'src/app/views/services/services.service';
 import jwt_decode from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -18,7 +19,7 @@ export class LandingpageLayoutComponent {
   decodedToken:any
   id=''
   name=''
-  constructor(private service:ServicesService,private asd:AuthService,private route:Router,private arouter:ActivatedRoute) {
+  constructor(private toastr: ToastrService,private service:ServicesService,private asd:AuthService,private route:Router,private arouter:ActivatedRoute) {
     if(this.asd.LoggedIn()==true){
       this.loggedIn=true;
   }
@@ -32,6 +33,7 @@ this.name=this.decodedToken.name
    logout(){
     localStorage.removeItem('token');
     this.route.navigate(['auth/login'])
+    this.toastr.success('see you next time','logged out successfully', { timeOut: 2000 }); // Display time set to 2 seconds (2000 milliseconds)
 
    }
   nav(route:any){

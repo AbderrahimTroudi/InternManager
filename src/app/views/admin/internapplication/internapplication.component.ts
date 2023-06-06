@@ -50,7 +50,7 @@ export class InternapplicationComponent {
   
       this.dataService.DeleteStudent(id,"application/delete/").subscribe(response=>{
         console.log(response)
-         this.AllData.splice(i,1)
+         this.dataArray.splice(i,1)
   
       })
   
